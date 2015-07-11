@@ -1,5 +1,5 @@
 suites:
     main:
-        namespace: App
-        psr4_prefix: App
+        namespace: DexBarrett
+        psr4_prefix: DexBarrett
         src_path: app

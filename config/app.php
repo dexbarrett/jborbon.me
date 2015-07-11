@@ -140,9 +140,9 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        DexBarrett\Providers\AppServiceProvider::class,
+        DexBarrett\Providers\EventServiceProvider::class,
+        DexBarrett\Providers\RouteServiceProvider::class,
 
         /*
          * Third-party Service Providers

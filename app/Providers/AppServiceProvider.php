@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace DexBarrett\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

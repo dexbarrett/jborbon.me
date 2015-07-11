@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace DexBarrett\Events;
 
 abstract class Event
 {
