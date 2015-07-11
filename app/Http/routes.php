@@ -11,6 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+get('/', function () {
+    return view('front.blog.viewpost');
 });
+
+get('login', 'SessionController@index');
+get('logout', 'SessionController@destroy');
+
+post('login', 'SessionController@create');
+
+get('secret', ['middleware' => 'auth', function(){
+    return 'welcome to the secret section';
+}]);

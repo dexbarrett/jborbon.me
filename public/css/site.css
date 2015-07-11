@@ -1,0 +1,39 @@
+body {
+
+    padding-top: 78px;
+    font-family: 'Open Sans', sans-serif;
+    color: #555;
+    font-size: 17px;
+   
+}
+
+p {
+    margin-bottom: 1.2em;
+    line-height: 1.5em;
+}
+
+h1 {
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.login-box {
+    font-size: 18px;
+}
+
+h1.post-title {
+    text-align: center;
+    text-transform: capitalize;
+    margin-bottom: 25px;
+}
+
+.site-header {
+    font-family: 'Pacifico', cursive;
+    vertical-align: middle;
+    font-size: 32px;
+}
+
+pre.theme-peacocks-in-space {
+  font-size: .85em;
+  line-height: 1.2em;
+}
