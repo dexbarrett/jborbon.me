@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -143,6 +143,7 @@ return [
         DexBarrett\Providers\AppServiceProvider::class,
         DexBarrett\Providers\EventServiceProvider::class,
         DexBarrett\Providers\RouteServiceProvider::class,
+        DexBarrett\Providers\ViewComposerServiceProvider::class,
 
         /*
          * Third-party Service Providers
@@ -150,6 +151,8 @@ return [
 
         'Barryvdh\Debugbar\ServiceProvider',
         Collective\Html\HtmlServiceProvider::class,
+        Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
+        AlfredoRamos\ParsedownExtra\ParsedownExtraServiceProvider::class
 
     ],
 
@@ -202,6 +205,7 @@ return [
         // Third-party aliases
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Markdown'  => AlfredoRamos\ParsedownExtra\Facades\ParsedownExtra::class
 
     ],
 

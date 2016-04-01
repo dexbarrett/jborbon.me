@@ -35,5 +35,19 @@ h1.post-title {
 
 pre.theme-peacocks-in-space {
   font-size: .85em;
-  line-height: 1.2em;
+  line-height: 1em;
+}
+
+textarea {
+    resize: none;
+    overflow:auto;
+    font-size: 14px !important;
+}
+
+ul li.error {
+    font-size: 13px;
+}
+
+div.flash {
+    font-size: 14px;
 }

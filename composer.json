@@ -7,15 +7,18 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-        "laravelcollective/html": "5.1.*"
+        "laravelcollective/html": "5.1.*",
+        "barryvdh/laravel-debugbar": "^2.0",
+        "filp/whoops": "~1.0",
+        "cviebrock/eloquent-sluggable": "^3.1",
+        "alfredo-ramos/parsedown-extra-laravel": "~0.4",
+        "pingpong/shortcode": "~2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~4.0",
-        "phpspec/phpspec": "~2.1",
-        "barryvdh/laravel-debugbar": "^2.0",
-        "filp/whoops": "~1.0"
+        "phpspec/phpspec": "~2.1"
     },
     "autoload": {
         "classmap": [

@@ -11,15 +11,14 @@
 |
 */
 
-get('/', function () {
+Route::get('/', function () {
     return view('front.blog.viewpost');
 });
 
-get('login', 'SessionController@index');
-get('logout', 'SessionController@destroy');
+Route::get('login', 'SessionController@index');
+Route::post('login', 'SessionController@create');
+Route::get('logout', 'SessionController@destroy');
 
-post('login', 'SessionController@create');
-
-get('secret', ['middleware' => 'auth', function(){
-    return 'welcome to the secret section';
-}]);
+Route::group(['prefix' => 'admin'], function () {
+    Route::resource('post', 'PostController', ['except' => ['index', 'destroy']]);
+});
