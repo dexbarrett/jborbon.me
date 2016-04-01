@@ -12,7 +12,7 @@
         "filp/whoops": "~1.0",
         "cviebrock/eloquent-sluggable": "^3.1",
         "alfredo-ramos/parsedown-extra-laravel": "~0.4",
-        "pingpong/shortcode": "~2.0"
+        "pingpong/shortcode": "2.1.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

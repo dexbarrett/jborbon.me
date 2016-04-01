@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "84db13922fa508c21475d274013c144e",
-    "content-hash": "3e816cf342378a99724635866b3dfe04",
+    "hash": "66fe14109af65ada672915d72580578a",
+    "content-hash": "0f41c8abc5c4a5f74506fa18e88d19d3",
     "packages": [
         {
             "name": "alfredo-ramos/parsedown-extra-laravel",
@@ -771,16 +771,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.1.31",
+            "version": "v5.1.32",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "d899fbda59bf3ffcde11a9b443c01043b76f40b3"
+                "reference": "bdb01c499305ede9d6f8caec57649bbaca4dd5e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/d899fbda59bf3ffcde11a9b443c01043b76f40b3",
-                "reference": "d899fbda59bf3ffcde11a9b443c01043b76f40b3",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/bdb01c499305ede9d6f8caec57649bbaca4dd5e3",
+                "reference": "bdb01c499305ede9d6f8caec57649bbaca4dd5e3",
                 "shasum": ""
             },
             "require": {
@@ -794,7 +794,7 @@
                 "monolog/monolog": "~1.11",
                 "mtdowling/cron-expression": "~1.0",
                 "nesbot/carbon": "~1.19",
-                "paragonie/random_compat": "~1.1",
+                "paragonie/random_compat": "~1.4",
                 "php": ">=5.5.9",
                 "psy/psysh": "0.7.*",
                 "swiftmailer/swiftmailer": "~5.1",
@@ -895,7 +895,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2016-02-24 15:13:21"
+            "time": "2016-04-01 18:52:14"
         },
         {
             "name": "laravelcollective/html",
@@ -1423,21 +1423,22 @@
         },
         {
             "name": "pingpong/shortcode",
-            "version": "v2.2.0",
+            "version": "v2.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pingpong-labs/shortcode.git",
-                "reference": "50e9115e3133fe21d1553169e73664d3ae5a4152"
+                "reference": "8e2571cccdb2f04df70921447c2f86034d7dcae1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pingpong-labs/shortcode/zipball/50e9115e3133fe21d1553169e73664d3ae5a4152",
-                "reference": "50e9115e3133fe21d1553169e73664d3ae5a4152",
+                "url": "https://api.github.com/repos/pingpong-labs/shortcode/zipball/8e2571cccdb2f04df70921447c2f86034d7dcae1",
+                "reference": "8e2571cccdb2f04df70921447c2f86034d7dcae1",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.0",
-                "thunderer/shortcode": "0.5.*"
+                "illuminate/container": "5.1.*",
+                "illuminate/support": "5.1.*",
+                "php": ">=5.4.0"
             },
             "require-dev": {
                 "mockery/mockery": "~0.9",
@@ -1466,7 +1467,7 @@
                 "shortcode",
                 "wordpress"
             ],
-            "time": "2016-01-21 08:03:57"
+            "time": "2015-06-14 14:30:44"
         },
         {
             "name": "psr/log",
@@ -2513,58 +2514,6 @@
                 "dump"
             ],
             "time": "2016-03-07 11:06:07"
-        },
-        {
-            "name": "thunderer/shortcode",
-            "version": "v0.5.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thunderer/Shortcode.git",
-                "reference": "3a8d53780dc4c2cd823ba0c7c25f1131045337d8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thunderer/Shortcode/zipball/3a8d53780dc4c2cd823ba0c7c25f1131045337d8",
-                "reference": "3a8d53780dc4c2cd823ba0c7c25f1131045337d8",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.1|~5"
-            },
-            "suggest": {
-                "ext-dom": "if you want to use XML serializer",
-                "ext-json": "if you want to use JSON serializer",
-                "symfony/yaml": "if you want to use YAML serializer"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Thunder\\Shortcode\\": "src/",
-                    "Thunder\\Shortcode\\Tests\\": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tomasz Kowalczyk",
-                    "email": "tomasz@kowalczyk.cc"
-                }
-            ],
-            "description": "Advanced shortcode (BBCode) parser and engine for PHP",
-            "keywords": [
-                "bbcode",
-                "engine",
-                "library",
-                "parser",
-                "shortcode"
-            ],
-            "time": "2016-01-26 09:36:46"
         },
         {
             "name": "vlucas/phpdotenv",

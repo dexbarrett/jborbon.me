@@ -144,6 +144,7 @@ return [
         DexBarrett\Providers\EventServiceProvider::class,
         DexBarrett\Providers\RouteServiceProvider::class,
         DexBarrett\Providers\ViewComposerServiceProvider::class,
+        DexBarrett\Providers\ShortCodeServiceProvider::class,
 
         /*
          * Third-party Service Providers
@@ -152,7 +153,8 @@ return [
         'Barryvdh\Debugbar\ServiceProvider',
         Collective\Html\HtmlServiceProvider::class,
         Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
-        AlfredoRamos\ParsedownExtra\ParsedownExtraServiceProvider::class
+        AlfredoRamos\ParsedownExtra\ParsedownExtraServiceProvider::class,
+        Pingpong\Shortcode\ShortcodeServiceProvider::class
 
     ],
 
@@ -205,7 +207,8 @@ return [
         // Third-party aliases
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        'Markdown'  => AlfredoRamos\ParsedownExtra\Facades\ParsedownExtra::class
+        'Markdown'  => AlfredoRamos\ParsedownExtra\Facades\ParsedownExtra::class,
+        'Shortcode'  => Pingpong\Shortcode\ShortcodeFacade::class
 
     ],
 

@@ -2,6 +2,7 @@
 namespace DexBarrett;
 
 use DexBarrett\Post;
+use Shortcode;
 use DexBarrett\Services\Validation\PostValidator;
 use AlfredoRamos\ParsedownExtra\ParsedownExtraLaravel;
 
@@ -25,7 +26,9 @@ class SavePost
         $post = new Post;
         $post->title = $data['title'];
         $post->markdown_content = $data['content'];
-        $post->html_content = $this->markdownParser->parse($data['content']);
+        $post->html_content = $this->markdownParser->parse(
+            Shortcode::compile($data['content'])
+        );
         $post->user_id = 1;
         $post->post_category_id = $data['category'];
         $post->post_type_id = 2;
@@ -45,7 +48,9 @@ class SavePost
 
         $post->title = $data['title'];
         $post->markdown_content = $data['content'];
-        $post->html_content = $this->markdownParser->parse($data['content']);
+        $post->html_content = $this->markdownParser->parse(
+            Shortcode::compile($data['content'])
+        );
         $post->post_category_id = $data['category'];
         $post->post_status_id = $data['status'];
 
