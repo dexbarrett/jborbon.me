@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div class="panel-footer">
-                        <button class="btn btn-block btn-success">actualizar</button>
+                        {!! Form::submit('Actualizar', ['id' => 'publish', 'class' => 'btn btn-block btn-success']) !!}
                     </div>
                 </div>
             </div>
@@ -54,6 +54,11 @@
                 return '<div class="create">Agregar <strong>' + escape(data.input) + '</strong>&hellip;</div>';
             }
         }
+    });
+    $('#publish').on('click', function(e){
+        e.preventDefault();
+        $(this).prop('disabled', true);
+        $('form').first().submit();
     });
 </script>
 @stop
