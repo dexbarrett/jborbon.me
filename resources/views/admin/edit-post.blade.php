@@ -6,7 +6,9 @@
 @stop
 @section('content')
     <div class="row">
-        @include('partials.validation-errors')
+        <div class="col-md-11">
+            @include('partials.validation-errors')
+        </div>
         {!! Form::open(['url' => action('PostController@update', ['post' => $post->id]), 'method' => 'put']) !!}
             <div class="col-md-8">
                 <div class="form-group">
