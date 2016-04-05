@@ -50,6 +50,7 @@
 <script>
     $('.selectize').selectize({
         highlight: false,
+        create: true,
         plugins: ['remove_button'],
         render: {
             option_create: function(data, escape){

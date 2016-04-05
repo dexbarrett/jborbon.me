@@ -1,8 +1,9 @@
 <?php
 namespace DexBarrett;
 
-use DexBarrett\Post;
 use Shortcode;
+use DexBarrett\Tag;
+use DexBarrett\Post;
 use DexBarrett\Services\Validation\PostValidator;
 use AlfredoRamos\ParsedownExtra\ParsedownExtraLaravel;
 
@@ -35,7 +36,7 @@ class SavePost
         $post->post_status_id = $data['status'];
 
         $post->save();
-        $post->tags()->attach($data['tags']);
+        $post->tags()->attach($this->parseTags($data['tags']));
 
         return true;
     }
@@ -45,7 +46,7 @@ class SavePost
         if ($this->dataIsNotValid($data)) {
             return false;
         }
-
+    
         $post->title = $data['title'];
         $post->markdown_content = $data['content'];
         $post->html_content = $this->markdownParser->parse(
@@ -55,7 +56,7 @@ class SavePost
         $post->post_status_id = $data['status'];
 
         $post->save();
-        $post->tags()->sync($data['tags']);
+        $post->tags()->sync($this->parseTags($data['tags']));
 
         return true;
     }
@@ -68,5 +69,18 @@ class SavePost
     protected function dataIsNotValid(array $input)
     {
         return ! $this->postValidator->validate($input);
+    }
+
+    protected function parseTags($tags)
+    {
+        $tagsToCreate = array_filter($tags, function($tag) {
+            return ((int)$tag) === 0;
+        });
+
+        $newTagIds = array_map(function($tag){
+            return Tag::create(['name' => $tag])->id;
+        }, $tagsToCreate);
+
+        return array_replace($tags, $newTagIds);
     }
 }
