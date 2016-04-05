@@ -23,17 +23,17 @@ class Post extends Model implements SluggableInterface
 
     public function category()
     {
-        return $this->belongsTo(PostCategory::class);
+        return $this->belongsTo(PostCategory::class, 'post_category_id');
     }
 
     public function type()
     {
-        return $this->belongsTo(PostType::class);
+        return $this->belongsTo(PostType::class, 'post_type_id');
     }
 
     public function status()
     {
-        return $this->belongsTo(PostStatus::class);
+        return $this->belongsTo(PostStatus::class, 'post_status_id');
     }
 
     public function tags()
