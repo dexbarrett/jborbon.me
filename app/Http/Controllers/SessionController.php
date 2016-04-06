@@ -21,7 +21,7 @@ class SessionController extends Controller
         $password = $request->input('password');
 
         if (auth()->attempt(['username' => $username, 'password' => $password])) {
-            return redirect()->intended('secret');
+            return redirect()->intended(action('AdminController@index'));
         }
 
         return redirect()->action('SessionController@index')

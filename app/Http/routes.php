@@ -12,13 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('front.blog.viewpost');
+    return 'home page';
 });
 
 Route::get('login', 'SessionController@index');
 Route::post('login', 'SessionController@create');
 Route::get('logout', 'SessionController@destroy');
 
-Route::group(['prefix' => 'admin'], function () {
-    Route::resource('post', 'PostController', ['except' => ['index', 'destroy']]);
+Route::get('/{slug}', 'PostController@findBySlug');
+
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+    Route::resource('post', 'PostController', ['except' => ['index', 'destroy', 'show']]);
+    Route::get('dashboard', 'AdminController@index');
 });

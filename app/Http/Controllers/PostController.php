@@ -16,10 +16,21 @@ class PostController extends Controller
         return view('admin.create-post');
     }
 
+    public function findBySlug($postSlug)
+    {
+        $post = Post::where('slug', $postSlug)->firstOrFail();
+
+        return view('front.blog.viewpost')
+            ->with(compact('post'));
+    }
+
     public function store(SavePost $savePost)
     {
+        $data = collect(request()->all())
+            ->put('user_id', auth()->user()->id)
+            ->toArray();
         
-        if (! $savePost->create(request()->all())) {
+        if (! $savePost->create($data)) {
             return redirect()->back()
                 ->withInput()
                 ->withErrors($savePost->errors());

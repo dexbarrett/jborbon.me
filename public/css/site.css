@@ -51,3 +51,14 @@ ul li.error {
 div.flash {
     font-size: 14px;
 }
+
+.button-icon, .post-title-date-icon {
+  margin-right: 5px;
+  line-height: 1;
+}
+
+.post-tag
+{
+    font-weight: normal !important;
+    font-size: 70% !important;
+}

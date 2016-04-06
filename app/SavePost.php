@@ -30,7 +30,7 @@ class SavePost
         $post->html_content = $this->markdownParser->parse(
             Shortcode::compile($data['content'])
         );
-        $post->user_id = 1;
+        $post->user_id = $data['user_id'];
         $post->post_category_id = $data['category'];
         $post->post_type_id = 2;
         $post->post_status_id = $data['status'];
