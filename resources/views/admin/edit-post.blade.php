@@ -24,7 +24,7 @@
                         <div class="form-group">
                             {!! Form::select('tags[]',
                              $postTags, $selectedTags,
-                            ['placeholder' => 'seleccionar tags', 'multiple', 'class' => 'selectize']) !!}
+                            ['placeholder' => 'seleccionar etiquetas', 'multiple', 'class' => 'selectize']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::select('category',
