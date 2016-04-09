@@ -10,12 +10,12 @@
 @section('content')
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
-        <article>
-            <h1 class="text-center">{{{ ucfirst($post->title) }}}</h1>
+        <h1 class="text-center">{{{ ucfirst($post->title) }}}</h1>
+        <article class="post-content">
             {!! $post->html_content !!}
         </article>
-            <hr>
-            {!! formatTagsAsLabels($post->tags->toArray()) !!} 
+        <hr>
+        {!! formatTagsAsLabels($post->tags->toArray()) !!} 
     </div>
 </div>
 @stop
