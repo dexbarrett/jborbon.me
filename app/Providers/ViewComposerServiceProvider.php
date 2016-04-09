@@ -17,9 +17,9 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer(['admin.create-post', 'admin.edit-post'], function($view){
-            $view->with('postCategories', PostCategory::all()->pluck('name', 'id'));
-            $view->with('postStatuses', PostStatus::all()->pluck('name', 'id'));
-            $view->with('postTags', Tag::all()->pluck('name', 'id'));
+            $view->with('postCategories', PostCategory::orderBy('name')->get()->pluck('name', 'id'));
+            $view->with('postStatuses', PostStatus::orderBy('name')->get()->pluck('name', 'id'));
+            $view->with('postTags', Tag::orderBy('name')->get()->pluck('name', 'id'));
         });
     }
 
