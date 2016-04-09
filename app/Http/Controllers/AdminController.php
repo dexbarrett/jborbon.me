@@ -13,12 +13,14 @@ class AdminController extends Controller
     public function index($postType = 2, $postStatus = 2)
     {
         $postTypePublished = DB::select(
-            'select count(id) as count from posts where user_id = ? and post_type_id = ? and post_status_id = 2',
+            'select count(id) as count from posts where user_id = ? 
+            and post_type_id = ? and post_status_id = 2',
             [auth()->user()->id, $postType]
         );
 
         $postTypeDraft = DB::select(
-            'select count(id) as count from posts where user_id = ? and post_type_id = ? and post_status_id = 1',
+            'select count(id) as count from posts where user_id = ? and
+             post_type_id = ? and post_status_id = 1',
             [auth()->user()->id, $postType]
         );
 

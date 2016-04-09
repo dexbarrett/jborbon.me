@@ -19,6 +19,13 @@ class Post extends Model implements SluggableInterface
         'save_to'    => 'slug',
     ];
 
+    public function scopePublished($query)
+    {
+        return $query->where('post_status_id', 2)
+                     ->orderBy('created_at', 'desc');
+
+    }
+
     /* Relationships */
 
     public function category()

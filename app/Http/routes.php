@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return 'home page';
-});
+Route::get('/', 'PostController@index');
 
 Route::get('login', 'SessionController@index');
 Route::post('login', 'SessionController@create');
@@ -22,6 +20,6 @@ Route::get('logout', 'SessionController@destroy');
 Route::get('/{slug}', 'PostController@findBySlug');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
-    Route::resource('post', 'PostController', ['except' => ['index', 'destroy', 'show']]);
+    Route::resource('post', 'PostController', ['except' => ['destroy', 'show']]);
     Route::get('dashboard/{postType?}/{postStatus?}', 'AdminController@index');
 });

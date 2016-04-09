@@ -10,6 +10,15 @@ use DexBarrett\Http\Controllers\Controller;
 
 class PostController extends Controller
 {
+    public function index()
+    {
+        $posts = Post::published()
+            ->select(['id', 'title', 'slug', 'created_at'])
+            ->paginate(10);
+
+        return view('front.blog.home')
+            ->with(compact('posts'));
+    }
 
     public function create()
     {
@@ -18,7 +27,9 @@ class PostController extends Controller
 
     public function findBySlug($postSlug)
     {
-        $post = Post::where('slug', $postSlug)->firstOrFail();
+        $post = Post::where('slug', $postSlug)
+                ->select(['id', 'title', 'html_content'])
+                ->firstOrFail();
 
         return view('front.blog.viewpost')
             ->with(compact('post'));

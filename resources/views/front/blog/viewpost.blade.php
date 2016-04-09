@@ -13,7 +13,9 @@
         <article>
             <h1 class="text-center">{{{ ucfirst($post->title) }}}</h1>
             {!! $post->html_content !!}
-        </article> 
+        </article>
+            <hr>
+            {!! formatTagsAsLabels($post->tags->toArray()) !!} 
     </div>
 </div>
 @stop
