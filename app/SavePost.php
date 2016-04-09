@@ -73,14 +73,11 @@ class SavePost
 
     protected function parseTags($tags)
     {
-        $tagsToCreate = array_filter($tags, function($tag) {
-            return ((int)$tag) === 0;
-        });
-
-        $newTagIds = array_map(function($tag){
-            return Tag::create(['name' => $tag])->id;
-        }, $tagsToCreate);
-
-        return array_replace($tags, $newTagIds);
+        return array_map(function($tag) {
+            if (! is_numeric($tag)) {
+                return Tag::create(['name' => $tag])->id;
+            }
+            return $tag;
+        }, $tags);
     }
 }
