@@ -2,8 +2,11 @@
 
 namespace DexBarrett\Http\Controllers;
 
+use DexBarrett\Tag;
 use DexBarrett\Post;
+use DexBarrett\PostType;
 use DexBarrett\SavePost;
+use DexBarrett\PostStatus;
 use Illuminate\Http\Request;
 use DexBarrett\Http\Requests;
 use DexBarrett\Http\Controllers\Controller;
@@ -34,6 +37,26 @@ class PostController extends Controller
         return view('front.blog.viewpost')
             ->with(compact('post'));
     }
+
+    public function findByTag($tagSlug)
+    {
+        $tag = Tag::where('slug', $tagSlug)->firstOrFail();
+        $postType = PostType::where('name', 'post')->firstOrFail();
+        $postStatus = PostStatus::where('name', 'published')->firstOrFail();
+
+        $posts = Post::where('post_type_id', $postType->id)
+                    ->where('post_status_id', $postStatus->id)
+                    ->join('post_tag', function($join) use ($tag){
+                        $join->on('posts.id', '=', 'post_tag.post_id')
+                             ->where('post_tag.tag_id', '=', $tag->id);
+                    })
+                    ->select(['posts.id', 'posts.title', 'posts.slug', 'posts.created_at'])
+                    ->paginate(10);
+
+        return view('front.blog.viewpost-by-tag')
+                ->with(compact('posts'))
+                ->with('tagName', $tag->name);
+    }       
 
     public function store(SavePost $savePost)
     {

@@ -18,6 +18,7 @@ Route::post('login', 'SessionController@create');
 Route::get('logout', 'SessionController@destroy');
 
 Route::get('/{slug}', 'PostController@findBySlug');
+Route::get('tag/{tagslug}', 'PostController@findByTag');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('post', 'PostController', ['except' => ['destroy', 'show']]);
