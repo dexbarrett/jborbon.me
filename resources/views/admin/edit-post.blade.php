@@ -29,7 +29,7 @@
                         <div class="form-group">
                             {!! Form::select('category',
                              $postCategories, $post->post_category_id,
-                            ['placeholder' => 'seleccionar categoría', 'class' => 'form-control']) !!}
+                            ['placeholder' => 'seleccionar categoría', 'class' => 'selectize']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::select('status',

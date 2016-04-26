@@ -7,7 +7,7 @@ class PostValidator extends FormValidator
         'title' => 'required',
         'content' => 'required',
         'tags' => 'required|array',
-        'category' => 'required|integer|exists:post_categories,id',
+        'category' => 'required',
         'status' => 'required|integer|exists:post_statuses,id'
     ];
 
