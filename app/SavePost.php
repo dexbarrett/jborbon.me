@@ -31,7 +31,7 @@ class SavePost
             Shortcode::compile($data['content'])
         );
         $post->user_id = $data['user_id'];
-        $post->post_category_id = $data['category'];
+        $post->post_category_id = $this->parseCategory($data['category']);
         $post->post_type_id = 2;
         $post->post_status_id = $data['status'];
 
@@ -52,7 +52,7 @@ class SavePost
         $post->html_content = $this->markdownParser->parse(
             Shortcode::compile($data['content'])
         );
-        $post->post_category_id = $data['category'];
+        $post->post_category_id = $this->parseCategory($data['category']);
         $post->post_status_id = $data['status'];
 
         $post->save();
@@ -69,6 +69,17 @@ class SavePost
     protected function dataIsNotValid(array $input)
     {
         return ! $this->postValidator->validate($input);
+    }
+
+    protected function parseCategory($category)
+    {
+        $foundCategory = PostCategory::find($category);
+
+        if ($foundCategory) {
+            return $foundCategory->id;
+        }
+
+        return PostCategory::create(['name' => $category])->id;
     }
 
     protected function parseTags($tags)
