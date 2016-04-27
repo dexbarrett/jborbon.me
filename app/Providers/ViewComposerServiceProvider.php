@@ -18,7 +18,7 @@ class ViewComposerServiceProvider extends ServiceProvider
     {
         view()->composer(['admin.create-post', 'admin.edit-post'], function($view){
             $view->with('postCategories', PostCategory::orderBy('name')->get()->pluck('name', 'id'));
-            $view->with('postStatuses', PostStatus::orderBy('name')->get()->pluck('name', 'id'));
+            $view->with('postStatuses', PostStatus::orderBy('name')->get()->pluck('desc', 'id'));
             $view->with('postTags', Tag::orderBy('name')->get()->pluck('name', 'id'));
         });
     }

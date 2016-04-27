@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('page-title', 'crear post')
+@section('page-title', "crear {$postType->desc}")
 @section('custom-styles')
 <link href="/lib/selectize/selectize.css" rel="stylesheet">
 <link href="/lib/selectize/selectize.default.css" rel="stylesheet">
@@ -11,8 +11,9 @@
         </div>
         {!! Form::open(['url' => action('PostController@store')]) !!}
             <div class="col-md-8">
+                {!! Form::hidden('post_type', $postType->id) !!}
                 <div class="form-group">
-                    {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'título del post', 'autocomplete' => 'off']) !!}
+                    {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => "título de {$postType->desc}", 'autocomplete' => 'off']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::textarea('content', null, ['class' => 'form-control', 'rows' => '20']) !!}
