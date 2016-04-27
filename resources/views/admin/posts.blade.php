@@ -7,12 +7,16 @@
 @section('content')
 <div class="row">
     <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title text-center">listado de {{ $postType->desc }}s - status: <i>{{ $postStatus->desc }}</i></div>
+        </div>
         <div class="panel-body">
             <div class="btn-group" role="group" aria-label="...">
-                <a href="{{ action('AdminController@index', ['postType' => $postType, 'postStatus' => 2]) }}" class="btn btn-primary">Publicados <span class="badge">{{ $postTypePublished[0]->count }}</span></a>
-                <a href="{{ action('AdminController@index', ['postType' => $postType, 'postStatus' => 1]) }}" class="btn btn-warning">Borradores <span class="badge">{{ $postTypeDraft[0]->count }}</a>
+                <a href="{{ action('AdminController@index', ['postType' => $postType->name, 'postStatus' => $postStatusPublished->name]) }}" class="btn btn-primary">Publicados <span class="badge">{{ $postTypePublishedCount }}</span></a>
+                <a href="{{ action('AdminController@index', ['postType' => $postType->name, 'postStatus' => $postStatusDraft->name]) }}" class="btn btn-warning">Borradores <span class="badge">{{ $postTypeDraftCount }}</a>
             </div>
-            <a href="{{ action('PostController@create') }}" class="btn btn-info btn-md pull-right"><i class="fa fa-file-text button-icon"></i>nuevo post</a>
+            <a href="{{ action('PostController@create', ['postType' => $postType->name]) }}" class="btn btn-info btn-md pull-right">
+                <i class="fa fa-file-text button-icon"></i>crear {{ $postType->desc }}</a>
         </div>
     </div>
 </div>
@@ -20,7 +24,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Título del post</th>
+                <th>Título</th>
                 <th>Etiquetas</th>
             </tr>
         </thead>

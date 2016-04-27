@@ -23,9 +23,12 @@ class PostController extends Controller
             ->with(compact('posts'));
     }
 
-    public function create()
+    public function create($postTypeName)
     {
-        return view('admin.create-post');
+        $postType = PostType::where('name', $postTypeName)->firstOrFail();
+        
+        return view('admin.create-post')
+            ->with(compact('postType'));
     }
 
     public function findBySlug($postSlug)

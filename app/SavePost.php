@@ -32,7 +32,7 @@ class SavePost
         );
         $post->user_id = $data['user_id'];
         $post->post_category_id = $this->parseCategory($data['category']);
-        $post->post_type_id = 2;
+        $post->post_type_id = $data['post_type'];
         $post->post_status_id = $data['status'];
 
         $post->save();
