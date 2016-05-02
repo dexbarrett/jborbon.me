@@ -141,6 +141,7 @@ return [
          * Application Service Providers...
          */
         DexBarrett\Providers\AppServiceProvider::class,
+        DexBarrett\Providers\AuthServiceProvider::class,
         DexBarrett\Providers\EventServiceProvider::class,
         DexBarrett\Providers\RouteServiceProvider::class,
         DexBarrett\Providers\ViewComposerServiceProvider::class,
@@ -203,6 +204,7 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+        'Gate' => Illuminate\Support\Facades\Gate::class,
 
         // Third-party aliases
         'Form' => Collective\Html\FormFacade::class,

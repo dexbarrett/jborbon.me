@@ -17,7 +17,6 @@ class Kernel extends HttpKernel
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \DexBarrett\Http\Middleware\VerifyCsrfToken::class,
     ];
 
     /**
@@ -29,5 +28,6 @@ class Kernel extends HttpKernel
         'auth' => \DexBarrett\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \DexBarrett\Http\Middleware\RedirectIfAuthenticated::class,
+        'post.available' => \DexBarrett\Http\Middleware\PostAvailable::class,
     ];
 }
