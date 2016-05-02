@@ -3,7 +3,7 @@ namespace DexBarrett;
 
 class ShortCode {
     
-    public function register($attr, $content = null, $name = null)
+    public function alert($attr, $content = null, $name = null)
     {
         $options = ['type' => 'info'];
         $options = array_merge($options, $attr);
@@ -11,4 +11,8 @@ class ShortCode {
         return '<div class="alert alert-' . $options['type'] . '">' . $content . '</div>';    
     }
 
+    public function tooltip($attr, $content = null, $name = null)
+    {
+        return '<span class="post-tooltip" title="' .  $attr['caption'] . '">' . $content . '</span>';
+    }
 }

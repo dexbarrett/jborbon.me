@@ -5,6 +5,8 @@
 @section('custom-styles')
 <link href="/lib/prettify/css/prettify.css" rel="stylesheet">
 <link href="/lib/prettify/css/peacocks-in-space.css" rel="stylesheet">
+<link href="/lib/tooltipster/tooltipster.css" rel="stylesheet">
+<link href="/lib/tooltipster/tooltipster-punk.css" rel="stylesheet">
 @stop
 
 @section('content')
@@ -23,10 +25,15 @@
 
 @section('custom-scripts')
 <script src="/lib/prettify/js/prettify.js"></script>
+<script src="/lib/tooltipster/jquery.tooltipster.min.js"></script>
 <script type="text/javascript">
 $(function() {
   $('pre').addClass('prettyprint theme-peacocks-in-space');
   prettyPrint();
+});
+
+$('.post-tooltip').tooltipster({
+    theme: 'tooltipster-punk'
 });
 </script>
 @stop
