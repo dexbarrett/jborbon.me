@@ -27,9 +27,11 @@ class SavePost
         $post = new Post;
         $post->title = $data['title'];
         $post->markdown_content = $data['content'];
-        $post->html_content = $this->markdownParser->parse(
-            Shortcode::compile($data['content'])
+
+        $post->html_content = Shortcode::compile(
+            $this->markdownParser->parse($data['content'])
         );
+        
         $post->user_id = $data['user_id'];
         $post->post_category_id = $this->parseCategory($data['category']);
         $post->post_type_id = $data['post_type'];
@@ -49,9 +51,11 @@ class SavePost
     
         $post->title = $data['title'];
         $post->markdown_content = $data['content'];
-        $post->html_content = $this->markdownParser->parse(
-            Shortcode::compile($data['content'])
+
+        $post->html_content = Shortcode::compile(
+            $this->markdownParser->parse($data['content'])
         );
+
         $post->post_category_id = $this->parseCategory($data['category']);
         $post->post_status_id = $data['status'];
 

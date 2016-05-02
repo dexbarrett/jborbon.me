@@ -7,6 +7,8 @@ use Illuminate\Support\ServiceProvider;
 
 class ShortCodeServiceProvider extends ServiceProvider
 {
+    protected $shortcodes = ['alert', 'tooltip'];
+
     /**
      * Bootstrap the application services.
      *
@@ -14,7 +16,7 @@ class ShortCodeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app['shortcode']->register('alert', ShortCode::class);
+        $this->registerShortCodes();
     }
 
     /**
@@ -25,5 +27,12 @@ class ShortCodeServiceProvider extends ServiceProvider
     public function register()
     {
         
+    }
+
+    protected function registerShortCodes()
+    {
+        foreach ($this->shortcodes as $shortcode) {
+            $this->app['shortcode']->register($shortcode, "DexBarrett\ShortCode@{$shortcode}");
+        }
     }
 }
