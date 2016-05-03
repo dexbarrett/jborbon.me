@@ -16,7 +16,9 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::published()
+            ->ofType('post')
             ->select(['id', 'title', 'slug', 'created_at'])
+            ->orderBy('created_at', 'desc')
             ->paginate(10);
 
         return view('front.blog.home')
@@ -34,8 +36,12 @@ class PostController extends Controller
     public function findBySlug($postSlug)
     {
         $post = Post::where('slug', $postSlug)
-                ->select(['id', 'title', 'html_content'])
+                ->select(['id', 'title', 'html_content', 'post_status_id', 'user_id'])
                 ->firstOrFail();
+
+        if ($post->isNotPublished() && (auth()->guest() || ! $post->publishedByUser(auth()->user()))) {
+            abort(404);
+        }
 
         return view('front.blog.viewpost')
             ->with(compact('post'));

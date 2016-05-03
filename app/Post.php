@@ -21,9 +21,36 @@ class Post extends Model implements SluggableInterface
 
     public function scopePublished($query)
     {
-        return $query->where('post_status_id', 2)
-                     ->orderBy('created_at', 'desc');
+        $postStatusPublished = PostStatus::where('name', 'published')
+            ->select(['id'])
+            ->firstOrFail();
 
+        return $query->where('post_status_id', $postStatusPublished->id);
+
+    }
+
+    public function scopeOfType($query, $type)
+    {
+        $postTypePost = PostType::where('name', $type)
+            ->select(['id'])
+            ->firstOrFail();
+
+        return $query->where('post_type_id', $postTypePost->id);
+    }
+
+    public function isNotPublished()
+    {
+        return ! $this->isPublished();
+    }
+
+    public function isPublished()
+    {
+        return strtolower($this->status->name) == 'published';
+    }
+
+    public function publishedByUser($user)
+    {
+        return $user->id == $this->user_id;
     }
 
     /* Relationships */
