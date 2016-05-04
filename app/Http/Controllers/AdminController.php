@@ -21,14 +21,14 @@ class AdminController extends Controller
 
         $postTypePublishedCount = DB::select(
             'select count(id) as count from posts where user_id = ? 
-            and post_type_id = ? and post_status_id = 2',
-            [auth()->user()->id, $postType->id]
+            and post_type_id = ? and post_status_id = ?',
+            [auth()->user()->id, $postType->id, $postStatusPublished->id]
         )[0]->count;
 
         $postTypeDraftCount = DB::select(
             'select count(id) as count from posts where user_id = ? and
-             post_type_id = ? and post_status_id = 1',
-            [auth()->user()->id, $postType->id]
+             post_type_id = ? and post_status_id = ?',
+            [auth()->user()->id, $postType->id, $postStatusDraft->id]
         )[0]->count;
 
         $posts = Post::with('type')
