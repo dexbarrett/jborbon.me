@@ -35,7 +35,7 @@
                         <a href="{{ action('PostController@findBySlug', ['slug' => $post->slug]) }}" target="_blank">{{ $post->title }}</a>
                     </td>
                     <td class="col-md-5">
-                        {!! formatTagsAsLabels($post->tags->toArray()) !!}
+                        {!! formatTagsAsLabels($post->tags->toArray(), $post->type->name) !!}
                     </td>
                     <td class="col-md-2 text-right">
                         <div class="btn-group">

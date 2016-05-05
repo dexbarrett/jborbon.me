@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-md-12">
         @if(count($posts))
-            <h3 class="text-center">Mostrando posts con la etiqueta <strong>{{ $tagName }}</strong></h3>
+            <h3 class="text-center">Mostrando {{ $postTypeName }}s con la etiqueta <strong>{{ $tagName }}</strong></h3>
         @endif
         <ul class="list-unstyled">
             @forelse($posts as $post)

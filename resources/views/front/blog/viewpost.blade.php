@@ -17,7 +17,7 @@
             {!! $post->html_content !!}
         
         <hr>
-        {!! formatTagsAsLabels($post->tags->toArray()) !!} 
+        {!! formatTagsAsLabels($post->tags->toArray(), $post->type->name) !!} 
         </article>
     </div>
 </div>
