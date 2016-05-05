@@ -35,10 +35,11 @@ class AdminController extends Controller
         ->with(['tags' => function($query) {
             $query->orderBy('name');
         }])
+        ->with('type')
         ->where('post_type_id', $postType->id)
         ->where('post_status_id', $postStatus->id)
         ->where('user_id', auth()->user()->id)
-        ->select(['id', 'title', 'slug'])
+        ->select(['id', 'title', 'slug', 'post_type_id'])
         ->orderBy('created_at', 'desc')->paginate(10);
 
         return view('admin.posts')
