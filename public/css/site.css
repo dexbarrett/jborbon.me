@@ -68,16 +68,25 @@ div.flash {
     margin-right: 0.2em;
 }
 
-.blog-post-title
+.blog-post-item
 {
-  font-size: 1.8em;
+  font-size: 1.3em;
+}
+
+ul.home-page .blog-post-item{
+    margin-bottom: 0px;
+    padding-bottom: 20px;
+    border-bottom: 1px #999 dashed;
+    margin-top: 0px;
+    padding-top: 20px;
 }
 
 .post-title-date
 {
     margin-left: 0.5em;
     padding: 0.5em;
-    font-size: 0.35em;
+    font-size: 0.4em;
+    letter-spacing: 0.12em;
     vertical-align: middle;
     font-weight: normal;
 }
@@ -97,4 +106,14 @@ a, a:hover, a:focus {
 
 .post-tooltip {
     border-bottom: 0.1em #CCC dashed;
+}
+
+li.category-list-item {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    font-size: 14px;
+}
+
+li.category-list-item a {
+  color: #666;
 }

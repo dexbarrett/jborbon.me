@@ -8,7 +8,7 @@
         @endif
         <ul class="list-unstyled">
             @forelse($posts as $post)
-                <li class="blog-post-title">
+                <li class="blog-post-item">
                     <i class="fa fa-code post-title-icon"></i>
                     <a href="{{ action('PostController@findBySlug', ['slug' => $post->slug]) }}">
                         {{ $post->title }}

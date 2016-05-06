@@ -21,6 +21,10 @@ class ViewComposerServiceProvider extends ServiceProvider
             $view->with('postStatuses', PostStatus::orderBy('name')->get()->pluck('desc', 'id'));
             $view->with('postTags', Tag::orderBy('name')->get()->pluck('name', 'id'));
         });
+
+        view()->composer(['front.blog.home'], function($view){
+            $view->with('categoriesByPostCount', PostCategory::getCategoryList());
+        });
     }
 
     /**
