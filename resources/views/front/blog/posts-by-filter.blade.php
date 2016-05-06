@@ -1,10 +1,10 @@
 @extends('front.master')
-@section('page-title', "posts with tag $tagName")
+@section('page-title', "posts con $filterType $filterName")
 @section('content')
 <div class="row">
     <div class="col-md-12">
         @if(count($posts))
-            <h3 class="text-center">Mostrando {{ $postTypeName }}s con la etiqueta <strong>{{ $tagName }}</strong></h3>
+            <h3 class="text-center">Mostrando {{ $postTypeName }}s con la {{ $filterType }} <strong>{{ $filterName }}</strong></h3>
         @endif
         <ul class="list-unstyled">
             @forelse($posts as $post)
@@ -19,7 +19,7 @@
                     </span>
                 </li>
             @empty
-            <h3 class="text-center">No hay posts con la etiqueta <strong>{{ $tagName }}</strong></h3>
+            <h3 class="text-center">No hay posts con la {{ $filterType }} <strong>{{ $filterName}}</strong></h3>
             @endforelse
         </ul>
     </div>

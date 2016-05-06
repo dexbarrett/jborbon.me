@@ -7,6 +7,7 @@ use DexBarrett\Post;
 use DexBarrett\PostType;
 use DexBarrett\SavePost;
 use DexBarrett\PostStatus;
+use DexBarrett\PostCategory;
 use Illuminate\Http\Request;
 use DexBarrett\Http\Requests;
 use DexBarrett\Http\Controllers\Controller;
@@ -49,7 +50,7 @@ class PostController extends Controller
 
     public function findByTag($postTypeName, $tagSlug)
     {
-        $tag = Tag::where('slug', $tagSlug)->firstOrFail();
+        $tag = Tag::where('slug', $tagSlug)->select(['id', 'name'])->firstOrFail();
         $postType = PostType::where('name', $postTypeName)->firstOrFail();
         $postStatus = PostStatus::where('name', 'published')->firstOrFail();
 
@@ -59,13 +60,42 @@ class PostController extends Controller
                         $join->on('posts.id', '=', 'post_tag.post_id')
                              ->where('post_tag.tag_id', '=', $tag->id);
                     })
+                    ->orderBy('posts.created_at', 'desc')
                     ->select(['posts.id', 'posts.title', 'posts.slug', 'posts.created_at'])
                     ->paginate(10);
 
-        return view('front.blog.viewpost-by-tag')
+        return view('front.blog.posts-by-filter')
                 ->with(compact('posts'))
-                ->with('tagName', $tag->name)
+                ->with('filterType', 'etiqueta')
+                ->with('filterName', $tag->name)
                 ->with('postTypeName', $postType->desc);
+    }
+
+    public function findByCategory($postTypeName, $categorySlug)
+    {
+        $category = PostCategory::where('slug', $categorySlug)
+            ->select(['id', 'name'])
+            ->firstOrFail();  
+
+        $postType = PostType::where('name', $postTypeName)->firstOrFail();
+        $postStatus = PostStatus::where('name', 'published')->firstOrFail();
+
+        $posts = Post::where('post_type_id', $postType->id)
+                    ->where('post_status_id', $postStatus->id)
+                    ->join('post_categories', function($join) use($category){
+                        $join->on('posts.post_category_id', '=', 'post_categories.id')
+                            ->where('post_categories.id', '=', $category->id);
+                    })
+                    ->orderBy('posts.created_at', 'desc')
+                    ->select(['posts.id', 'posts.title', 'posts.slug', 'posts.created_at'])
+                    ->paginate(10);
+
+        return view('front.blog.posts-by-filter')
+                ->with(compact('posts'))
+                ->with('filterType', 'categoría')
+                ->with('filterName', $category->name)
+                ->with('postTypeName', $postType->desc);
+
     }       
 
     public function store(SavePost $savePost)
