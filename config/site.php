@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'title' => 'Mi Blog'    
+    'title' => 'JBorbón'    
 ];
