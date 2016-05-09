@@ -1,5 +1,5 @@
 @extends('front.master')
-@section('page-title', "posts con $filterType $filterName")
+@section('page-title', "{$postTypeName}s con $filterType $filterName")
 @section('content')
 <div class="row">
     <div class="col-md-12">

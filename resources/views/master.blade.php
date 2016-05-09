@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Sitio personal de JBorbón">
+    <meta name="author" content="JBorbón Blog">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>@yield('page-title') - Dex Barrett</title>
+    <title>@yield('page-title') - JBorbón</title>
 
     <link href="https://bootswatch.com/sandstone/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">

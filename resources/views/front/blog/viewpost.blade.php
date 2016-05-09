@@ -1,6 +1,6 @@
 @extends('front.master')
 
-@section('page-title', 'View Post')
+@section('page-title', ucfirst($post->title))
 
 @section('custom-styles')
 <link href="/lib/prettify/css/prettify.css" rel="stylesheet">

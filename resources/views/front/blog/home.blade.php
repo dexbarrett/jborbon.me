@@ -1,5 +1,5 @@
 @extends('front.master')
-@section('page-title', 'Home Page')
+@section('page-title', 'Inicio')
 @section('content')
 <div class="row">
     <div class="col-md-8">
