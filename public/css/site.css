@@ -117,3 +117,7 @@ li.category-list-item {
 li.category-list-item a {
   color: #666;
 }
+
+.notfound-header {
+    font-size: 4.5em;
+}
