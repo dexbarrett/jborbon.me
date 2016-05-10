@@ -6,6 +6,7 @@ use DexBarrett\Tag;
 use DexBarrett\PostType;
 use DexBarrett\PostStatus;
 use DexBarrett\PostCategory;
+use DexBarrett\PostSettings;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Cviebrock\EloquentSluggable\SluggableInterface;
@@ -53,6 +54,17 @@ class Post extends Model implements SluggableInterface
         return $user->id == $this->user_id;
     }
 
+    public function hasCommentsEnabled()
+    {
+        return (bool) $this->settings->enable_comments;
+    }
+
+    public function enableComments($enable)
+    {
+        $this->settings->enable_comments = (bool)$enable;
+        $this->settings->save();
+    }
+
     /* Relationships */
 
     public function category()
@@ -73,5 +85,10 @@ class Post extends Model implements SluggableInterface
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function settings()
+    {
+        return $this->hasOne(PostSettings::class);
     }
 }
