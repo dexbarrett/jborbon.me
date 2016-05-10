@@ -4,6 +4,7 @@ namespace DexBarrett;
 use Shortcode;
 use DexBarrett\Tag;
 use DexBarrett\Post;
+use DexBarrett\PostSettings;
 use DexBarrett\Services\Validation\PostValidator;
 use AlfredoRamos\ParsedownExtra\ParsedownExtraLaravel;
 
@@ -40,6 +41,12 @@ class SavePost
         $post->save();
         $post->tags()->attach($this->parseTags($data['tags']));
 
+        $settings = new PostSettings([
+            'enable_comments' => array_get($data, 'enable_comments', 0)
+        ]);
+
+        $post->settings()->save($settings);
+
         return true;
     }
 
@@ -61,6 +68,8 @@ class SavePost
 
         $post->save();
         $post->tags()->sync($this->parseTags($data['tags']));
+
+        $post->enableComments(array_get($data, 'enable_comments', 0));
 
         return true;
     }

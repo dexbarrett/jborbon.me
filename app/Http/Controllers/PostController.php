@@ -37,7 +37,7 @@ class PostController extends Controller
     public function findBySlug($postSlug)
     {
         $post = Post::where('slug', $postSlug)
-                ->select(['id', 'title', 'html_content', 'post_status_id', 'user_id', 'post_type_id'])
+                ->select(['id', 'title', 'slug', 'html_content', 'post_status_id', 'user_id', 'post_type_id'])
                 ->firstOrFail();
 
         if ($post->isNotPublished() && (auth()->guest() || ! $post->publishedByUser(auth()->user()))) {
@@ -45,7 +45,8 @@ class PostController extends Controller
         }
 
         return view('front.blog.viewpost')
-            ->with(compact('post'));
+            ->with(compact('post'))
+            ->with('postUrl', $post->slug);
     }
 
     public function findByTag($postTypeName, $tagSlug)
