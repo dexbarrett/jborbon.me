@@ -47,7 +47,7 @@ class SavePost
 
         $post->settings()->save($settings);
 
-        return true;
+        return $post;
     }
 
     public function update(Post $post, array $data)

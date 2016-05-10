@@ -104,14 +104,16 @@ class PostController extends Controller
         $data = collect(request()->all())
             ->put('user_id', auth()->user()->id)
             ->toArray();
-        
-        if (! $savePost->create($data)) {
+
+        $postCreated = $savePost->create($data);
+
+        if (! $postCreated) {
             return redirect()->back()
                 ->withInput()
                 ->withErrors($savePost->errors());
         }
 
-        return redirect()->back()
+        return redirect()->action('PostController@edit', ['post' => $postCreated->id])
             ->with('message', 'El post se ha creado correctamente');
     }
 
