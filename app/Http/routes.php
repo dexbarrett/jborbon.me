@@ -22,7 +22,7 @@ Route::get('{postType}/tag/{tagslug}', 'PostController@findByTag');
 Route::get('{postType}/category/{categorySlug}', 'PostController@findByCategory');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
-    Route::resource('post', 'PostController', ['except' => ['create', 'destroy', 'show']]);
+    Route::resource('post', 'PostController', ['except' => ['create', 'show']]);
     Route::get('{postType}/create', 'PostController@create');
     Route::get('dashboard/{postType?}/{postStatus?}', 'AdminController@index');
 });

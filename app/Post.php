@@ -20,6 +20,8 @@ class Post extends Model implements SluggableInterface
         'save_to'    => 'slug',
     ];
 
+    /* Query Scopes */
+
     public function scopePublished($query)
     {
         $postStatusPublished = PostStatus::where('name', 'published')
@@ -38,6 +40,8 @@ class Post extends Model implements SluggableInterface
 
         return $query->where('post_type_id', $postTypePost->id);
     }
+
+    /* end of Query Scopes */
 
     public function isNotPublished()
     {
@@ -90,5 +94,18 @@ class Post extends Model implements SluggableInterface
     public function settings()
     {
         return $this->hasOne(PostSettings::class);
+    }
+
+    /* end of relationships */
+
+
+    /* Model Events */
+    protected static function boot()
+    {
+        parent:: boot();
+
+        static::deleting(function($post){
+            $post->tags()->detach();
+        });
     }
 }
