@@ -140,5 +140,13 @@ class PostController extends Controller
 
         return redirect()->back()
             ->with('message', 'El post se ha actualizado correctamente');
-    }       
+    }    
+
+    public function destroy($postID)
+    {
+        Post::findOrFail($postID)
+            ->delete();
+
+        return redirect()->back();
+    }   
 }
