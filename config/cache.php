@@ -74,6 +74,6 @@ return [
     |
     */
 
-    'prefix' => 'jborbon',
+    'prefix' => 'jborbon-',
 
 ];

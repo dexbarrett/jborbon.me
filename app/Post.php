@@ -41,7 +41,7 @@ class Post extends Model implements SluggableInterface
         return $query->where('post_type_id', $postTypePost->id);
     }
 
-    /* end of Query Scopes */
+    /* Custom Methods */
 
     public function isNotPublished()
     {
@@ -95,8 +95,6 @@ class Post extends Model implements SluggableInterface
     {
         return $this->hasOne(PostSettings::class);
     }
-
-    /* end of relationships */
 
 
     /* Model Events */
