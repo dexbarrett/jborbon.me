@@ -5,6 +5,8 @@ use Shortcode;
 use DexBarrett\Tag;
 use DexBarrett\Post;
 use DexBarrett\PostSettings;
+use DexBarrett\Events\PostCreated;
+use DexBarrett\Events\PostStatusChanged;
 use DexBarrett\Services\Validation\PostValidator;
 use AlfredoRamos\ParsedownExtra\ParsedownExtraLaravel;
 
@@ -47,11 +49,15 @@ class SavePost
 
         $post->settings()->save($settings);
 
+        event(new PostCreated($post));
+
         return $post;
     }
 
     public function update(Post $post, array $data)
     {
+        $statusChanged = $post->status->id != $data['status'];
+
         if ($this->dataIsNotValid($data)) {
             return false;
         }
@@ -70,6 +76,10 @@ class SavePost
         $post->tags()->sync($this->parseTags($data['tags']));
 
         $post->enableComments(array_get($data, 'enable_comments', 0));
+
+        if ($statusChanged) {
+            event(new PostStatusChanged);
+        }
 
         return true;
     }

@@ -10,6 +10,7 @@ use DexBarrett\PostStatus;
 use DexBarrett\PostCategory;
 use Illuminate\Http\Request;
 use DexBarrett\Http\Requests;
+use DexBarrett\Events\PostDeleted;
 use DexBarrett\Http\Controllers\Controller;
 
 class PostController extends Controller
@@ -146,6 +147,8 @@ class PostController extends Controller
     {
         Post::findOrFail($postID)
             ->delete();
+
+        event(new PostDeleted);
 
         return redirect()->back();
     }   

@@ -53,6 +53,11 @@ class Post extends Model implements SluggableInterface
         return strtolower($this->status->name) == 'published';
     }
 
+    public function isOfType($type)
+    {
+        return strtolower($this->type->name) == strtolower($type);
+    }
+
     public function publishedByUser($user)
     {
         return $user->id == $this->user_id;

@@ -32,6 +32,11 @@ class SitemapBuilder {
         return $sitemapContent;
     }
 
+    public function clearCache()
+    {
+        $this->cache->forget($this->cacheKey);
+    }
+
     protected function buildSitemap()
     {
         $lastModifiedPost = Post::published()
@@ -55,6 +60,5 @@ class SitemapBuilder {
 
         return $this->sitemap->toString();
     }
-
 
 }
