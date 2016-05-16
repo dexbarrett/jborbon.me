@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "66fe14109af65ada672915d72580578a",
-    "content-hash": "0f41c8abc5c4a5f74506fa18e88d19d3",
+    "hash": "d1875c71ad80351f0a20214ff4dacd99",
+    "content-hash": "12ad89b16897e4042b09fa32328a3f7d",
     "packages": [
         {
             "name": "alfredo-ramos/parsedown-extra-laravel",
@@ -1029,6 +1029,53 @@
                 "storage"
             ],
             "time": "2016-03-14 21:54:11"
+        },
+        {
+            "name": "league/pipeline",
+            "version": "0.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/pipeline.git",
+                "reference": "c79ce70462364cb98ecae4d9b74554483a82d706"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/pipeline/zipball/c79ce70462364cb98ecae4d9b74554483a82d706",
+                "reference": "c79ce70462364cb98ecae4d9b74554483a82d706",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "henrikbjorn/phpspec-code-coverage": "^1.0",
+                "phpspec/phpspec": "^2.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "League\\Pipeline\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Frank de Jonge",
+                    "email": "info@frenky.net"
+                }
+            ],
+            "description": "A plug and play pipeline implementation.",
+            "keywords": [
+                "composition",
+                "design pattern",
+                "pattern",
+                "pipeline",
+                "sequential"
+            ],
+            "time": "2016-03-23 13:41:04"
         },
         {
             "name": "maximebf/debugbar",

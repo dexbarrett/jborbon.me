@@ -1,22 +1,21 @@
 <?php
 namespace DexBarrett;
 
-use Shortcode;
 use DexBarrett\Tag;
 use DexBarrett\Post;
 use DexBarrett\PostSettings;
+use DexBarrett\Services\Parser\ContentParser;
 use DexBarrett\Services\Validation\PostValidator;
-use AlfredoRamos\ParsedownExtra\ParsedownExtraLaravel;
 
 class SavePost
 {
-    protected $markdownParser;
     protected $postValidator;
+    protected $contentParser;
 
-    public function __construct(ParsedownExtraLaravel $markdownParser, PostValidator $postValidator)
+    public function __construct(PostValidator $postValidator, ContentParser $contentParser)
     {
-        $this->markdownParser = $markdownParser;
         $this->postValidator = $postValidator;
+        $this->contentParser = $contentParser;
     }
 
     public function create(array $data)
@@ -29,9 +28,7 @@ class SavePost
         $post->title = $data['title'];
         $post->markdown_content = $data['content'];
 
-        $post->html_content = Shortcode::compile(
-            $this->markdownParser->parse($data['content'])
-        );
+        $post->html_content = $this->contentParser->parse($data['content']);
         
         $post->user_id = $data['user_id'];
         $post->post_category_id = $this->parseCategory($data['category']);
@@ -59,9 +56,7 @@ class SavePost
         $post->title = $data['title'];
         $post->markdown_content = $data['content'];
 
-        $post->html_content = Shortcode::compile(
-            $this->markdownParser->parse($data['content'])
-        );
+        $post->html_content = $this->contentParser->parse($data['content']);
 
         $post->post_category_id = $this->parseCategory($data['category']);
         $post->post_status_id = $data['status'];
