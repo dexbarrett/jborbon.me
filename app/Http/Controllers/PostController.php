@@ -19,8 +19,8 @@ class PostController extends Controller
     {
         $posts = Post::published()
             ->ofType('post')
-            ->select(['id', 'title', 'slug', 'created_at'])
-            ->orderBy('created_at', 'desc')
+            ->select(['id', 'title', 'slug', 'published_at'])
+            ->orderBy('published_at', 'desc')
             ->paginate(10);
 
         return view('front.blog.home')
@@ -62,8 +62,8 @@ class PostController extends Controller
                         $join->on('posts.id', '=', 'post_tag.post_id')
                              ->where('post_tag.tag_id', '=', $tag->id);
                     })
-                    ->orderBy('posts.created_at', 'desc')
-                    ->select(['posts.id', 'posts.title', 'posts.slug', 'posts.created_at'])
+                    ->orderBy('posts.published_at', 'desc')
+                    ->select(['posts.id', 'posts.title', 'posts.slug', 'posts.published_at'])
                     ->paginate(10);
 
         return view('front.blog.posts-by-filter')
@@ -88,8 +88,8 @@ class PostController extends Controller
                         $join->on('posts.post_category_id', '=', 'post_categories.id')
                             ->where('post_categories.id', '=', $category->id);
                     })
-                    ->orderBy('posts.created_at', 'desc')
-                    ->select(['posts.id', 'posts.title', 'posts.slug', 'posts.created_at'])
+                    ->orderBy('posts.published_at', 'desc')
+                    ->select(['posts.id', 'posts.title', 'posts.slug', 'posts.published_at'])
                     ->paginate(10);
 
         return view('front.blog.posts-by-filter')
