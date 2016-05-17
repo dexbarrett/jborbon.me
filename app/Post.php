@@ -2,6 +2,7 @@
 
 namespace DexBarrett;
 
+use Carbon\Carbon;
 use DexBarrett\Tag;
 use DexBarrett\PostType;
 use DexBarrett\PostStatus;
@@ -19,6 +20,23 @@ class Post extends Model implements SluggableInterface
         'build_from' => 'title',
         'save_to'    => 'slug',
     ];
+
+    protected $dates = ['created_at', 'updated_at', 'published_at'];
+
+    /* Mutators */
+
+    public function setPostStatusIdAttribute($statusID)
+    {
+        $statusPublished = PostStatus::where('name', 'published')
+            ->select(['id'])
+            ->first();
+
+        if (is_null($this->published_at) && $statusID == $statusPublished->id) {
+            $this->published_at = Carbon::now();
+        }
+
+        $this->attributes['post_status_id'] = $statusID;
+    }
 
     /* Query Scopes */
 

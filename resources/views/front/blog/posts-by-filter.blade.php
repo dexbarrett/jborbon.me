@@ -15,7 +15,7 @@
                     </a>
                     <span class="label label-danger post-title-date">
                         <i class="fa fa-calendar post-title-date-icon"></i>
-                        {{ $post->created_at->format('d/m/Y') }}
+                        {{ $post->published_at->format('d/m/Y') }}
                     </span>
                 </li>
             @empty
