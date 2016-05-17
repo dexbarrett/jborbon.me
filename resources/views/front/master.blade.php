@@ -1,4 +1,9 @@
 @extends('master')
+@section('custom-head')
+@if(auth()->guest())
+    @include('partials.google-analytics')
+@endif
+@stop
 @section('navigation')
     @include('partials.front-navigation')
 @stop
@@ -8,7 +13,4 @@
     @include('partials.flash-messages')
     @yield('content')
 </div>
-@if(auth()->guest())
-    @include('partials.google-analytics')
-@endif
 @stop

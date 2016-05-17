@@ -10,6 +10,8 @@
 
     <title>@yield('page-title') - JBorbón</title>
 
+    @yield('custom-head')
+
     <link href="https://bootswatch.com/sandstone/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
