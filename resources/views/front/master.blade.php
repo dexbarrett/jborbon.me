@@ -8,4 +8,7 @@
     @include('partials.flash-messages')
     @yield('content')
 </div>
+@if(auth()->guest())
+    @include('partials.google-analytics')
+@endif
 @stop
