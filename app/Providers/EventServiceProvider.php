@@ -2,6 +2,7 @@
 
 namespace DexBarrett\Providers;
 
+use DexBarrett\Listeners\PostEventListener;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -16,6 +17,10 @@ class EventServiceProvider extends ServiceProvider
         'DexBarrett\Events\SomeEvent' => [
             'DexBarrett\Listeners\EventListener',
         ],
+    ];
+
+    protected $subscribe = [
+        PostEventListener::class
     ];
 
     /**

@@ -13,7 +13,8 @@
         "cviebrock/eloquent-sluggable": "^3.1",
         "alfredo-ramos/parsedown-extra-laravel": "~0.4",
         "pingpong/shortcode": "2.1.*",
-        "league/pipeline": "^0.2.2"
+        "league/pipeline": "^0.2.2",
+        "tackk/cartographer": "1.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
