@@ -12,7 +12,10 @@ class ContentParser
 
         'markdown' => [
             'class' => MarkdownParser::class,
-            'method' => 'parse'
+            'method' => 'parse',
+            'setters' => [
+                'setUrlsLinked' => [false]
+            ]
         ],
 
         'shortcode' => [
@@ -28,7 +31,11 @@ class ContentParser
         $stages = [];
 
         foreach ($this->filters as $filterName => $params) {
-            $stages[] = [app()->make($params['class']), $params['method']];
+
+            $filterClass = app()->make($params['class']);
+            $this->callFilterSetters($filterName, $filterClass);
+            
+            $stages[] = [$filterClass, $params['method']];
         }
 
         $this->pipeline = new Pipeline($stages);
@@ -38,5 +45,22 @@ class ContentParser
     public function parse($input)
     {
         return $this->pipeline->process($input);
+    }
+
+    protected function filterHasSetters($filter)
+    {
+        return array_key_exists('setters', $this->filters[$filter]);
+    }
+
+    protected function callFilterSetters($filterName, $filterClass)
+    {
+        if (! $this->filterHasSetters($filterName)) {
+            return;
+        }
+
+        foreach ($this->filters[$filterName]['setters'] as $method => $args) {
+            call_user_func_array([$filterClass, $method], $args);
+        }
+
     }
 }

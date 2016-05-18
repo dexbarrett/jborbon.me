@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 
 class ShortCodeServiceProvider extends ServiceProvider
 {
-    protected $shortcodes = ['alert', 'tooltip'];
+    protected $shortcodes = ['alert', 'tooltip', 'video', 'image'];
 
     /**
      * Bootstrap the application services.
