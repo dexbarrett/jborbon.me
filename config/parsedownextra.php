@@ -2,18 +2,21 @@
 
 return [
 	'purifier'	=> [
-		'enabled'	=> true,
+		'enabled'	=> false,
 		'settings'	=> [
 			'parsedown'	=> [
 				'Attr.EnableID'				=> true,
 				
 				'AutoFormat.RemoveEmpty'	=> false,
 				
-				'HTML.Allowed'				=> '*[class],*[id],h1,h2,h3,h4,h5,h6,div,b,strong,i,em,a[href|title],ul,ol,li,p,br,span,span[title|class],img[width|height|alt|src],code,pre,hr,sup,table,thead,tbody,tr,th,td',
+				'HTML.Allowed'				=> '*[class],*[id],h1,h2,h3,h4,h5,h6,div[class],b,strong,i,em,a[href|title],ul,ol,li,p,br,span,span[title|class],img[width|height|alt|src],code,pre,hr,sup,table,thead,tbody,tr,th,td,iframe[width|height|src|frameborder|class]',
 				'HTML.Nofollow'				=> true,
 				'HTML.TargetBlank'			=> true,
 				
 				'Output.SortAttr'			=> true,
+
+                'HTML.SafeIframe'          => true,
+                'URI.SafeIframeRegexp'     => '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
 				
 				/**
 				 * List by https://linkdecrypter.com/
