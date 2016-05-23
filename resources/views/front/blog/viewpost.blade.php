@@ -15,9 +15,8 @@
         <h1 class="text-center">{{ ucfirst($post->title) }}</h1>
         <article class="post-content">
             {!! $post->html_content !!}
-        
-        <hr>
-        {!! formatTagsAsLabels($post->tags->toArray(), $post->type->name) !!} 
+            <hr>
+            {!! formatTagsAsLabels($post->tags->toArray(), $post->type->name) !!} 
         </article>
         @if($post->hasCommentsEnabled())
             @include('partials.disqus_thread')
@@ -30,13 +29,16 @@
 <script src="/lib/prettify/js/prettify.js"></script>
 <script src="/lib/tooltipster/jquery.tooltipster.min.js"></script>
 <script type="text/javascript">
-$('.post-content pre').addClass('prettyprint theme-peacocks-in-space');
-prettyPrint();
+$('.post-content pre')
+    .addClass('prettyprint theme-peacocks-in-space');
 
-$('.post-content table').addClass('table table-bordered table-responsive table-condensed');
+$('.post-content table')
+    .addClass('table table-bordered table-responsive table-condensed');
 
-$('.post-tooltip').tooltipster({
+$('.post-content .post-tooltip').tooltipster({
     theme: 'tooltipster-punk'
 });
+
+prettyPrint();
 </script>
 @stop

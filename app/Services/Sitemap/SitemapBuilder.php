@@ -51,11 +51,18 @@ class SitemapBuilder {
                 ->orderBy('updated_at', 'desc')
                 ->get();
 
-        $this->sitemap->add(url('/'), $lastModifiedPost->updated_at->format('Y-m-d'), ChangeFrequency::WEEKLY);
+        $this->sitemap->add(
+            url('/'), $lastModifiedPost->updated_at->format('Y-m-d'),
+            ChangeFrequency::WEEKLY
+        );
 
         foreach ($publishedPosts as $post) {
+
             $this->sitemap->add(
-                config('app.url') . '/' . $post->slug, $post->updated_at->format('Y-m-d'), ChangeFrequency::MONTHLY);
+                config('app.url') . '/' . $post->slug,
+                $post->updated_at->format('Y-m-d'),
+                ChangeFrequency::MONTHLY
+            );
         }
 
         return $this->sitemap->toString();
