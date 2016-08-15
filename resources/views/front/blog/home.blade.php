@@ -8,7 +8,7 @@
                 <li class="blog-post-item">
                     <i class="fa fa-code post-title-icon"></i>
                     <a href="{{ action('PostController@findBySlug', ['slug' => $post->slug]) }}">
-                        {{ $post->title }}
+                        {{ ucfirst($post->title) }}
                     </a>
                     <span class="label label-danger post-title-date">
                         <i class="fa fa-calendar post-title-date-icon"></i>
