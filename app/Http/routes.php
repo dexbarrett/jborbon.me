@@ -14,6 +14,8 @@
 Route::get('/', 'PostController@index');
 
 Route::get('sitemap.xml', 'SitemapController@render');
+Route::get('feed', 'FeedController@render');
+
 
 Route::get('login', 'SessionController@index');
 Route::post('login', 'SessionController@create');
