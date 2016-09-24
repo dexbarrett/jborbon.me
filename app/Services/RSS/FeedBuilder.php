@@ -64,7 +64,7 @@ class FeedBuilder {
 
     public function clearCache()
     {
-        $this->cache->forget($this->cacheKey);
+        $this->cacheService->forget($this->cacheKey);
     }
 
 }
