@@ -2,16 +2,17 @@
 
 namespace DexBarrett\Http\Controllers;
 
-use DexBarrett\Tag;
+use DexBarrett\Events\PostDeleted;
+use DexBarrett\Events\PostRestored;
+use DexBarrett\Http\Controllers\Controller;
+use DexBarrett\Http\Requests;
 use DexBarrett\Post;
+use DexBarrett\PostCategory;
+use DexBarrett\PostStatus;
 use DexBarrett\PostType;
 use DexBarrett\SavePost;
-use DexBarrett\PostStatus;
-use DexBarrett\PostCategory;
+use DexBarrett\Tag;
 use Illuminate\Http\Request;
-use DexBarrett\Http\Requests;
-use DexBarrett\Events\PostDeleted;
-use DexBarrett\Http\Controllers\Controller;
 
 class PostController extends Controller
 {
@@ -37,10 +38,10 @@ class PostController extends Controller
 
     public function findBySlug($postSlug)
     {
-        $post = Post::where('slug', $postSlug)
-                ->select(['id', 'title', 'slug', 'html_content', 'post_status_id', 'user_id', 'post_type_id'])
+        $post = Post::withTrashed()
+                ->where('slug', $postSlug)
+                ->select(['id', 'title', 'slug', 'html_content', 'post_status_id', 'user_id', 'post_type_id', 'deleted_at'])
                 ->firstOrFail();
-
         if ($post->isNotPublished() && (auth()->guest() || ! $post->publishedByUser(auth()->user()))) {
             abort(404);
         }
@@ -143,13 +144,32 @@ class PostController extends Controller
             ->with('message', 'El post se ha actualizado correctamente');
     }    
 
-    public function destroy($postID)
+    public function destroy($postID, $forceDelete)
     {
-        Post::findOrFail($postID)
-            ->delete();
+        $post = Post::withTrashed()->findOrFail($postID);
 
-        event(new PostDeleted);
+        event(new PostDeleted($post));
+
+        if((bool)$forceDelete)
+        {
+            $post->tags()->detach();
+            $post->forceDelete();
+        } else {
+            $post->delete();
+        }
+        
 
         return redirect()->back();
-    }   
+    }
+
+    public function restore($id)
+    {
+        $post = Post::onlyTrashed()->findOrFail($id);
+
+        $post->restore();
+
+        event(new PostRestored($post));
+
+        return redirect()->back();
+    }
 }

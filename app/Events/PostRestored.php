@@ -3,7 +3,7 @@ namespace DexBarrett\Events;
 
 use DexBarrett\Post;
 
-class PostDeleted extends Event 
+class PostRestored extends Event 
 {
     public $post;
 

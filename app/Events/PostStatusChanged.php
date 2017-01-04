@@ -1,4 +1,14 @@
 <?php
 namespace DexBarrett\Events;
 
-class PostStatusChanged extends Event {}
+use DexBarrett\Post;
+
+class PostStatusChanged extends Event 
+{
+    public $post;
+
+    public function __construct(Post $post)
+    { 
+        $this->post = $post;
+    }
+}

@@ -15,20 +15,34 @@ class AdminController extends Controller
     public function index($postTypeName = 'post', $postStatusName = 'published')
     {
         $postType = PostType::where('name', $postTypeName)->firstOrFail();
-        $postStatus = PostStatus::where('name', $postStatusName)->firstOrFail();
         $postStatusPublished = PostStatus::where('name', 'published')->firstOrFail();
         $postStatusDraft = PostStatus::where('name', 'draft')->firstOrFail();
 
+        $postStatus = null;
+        $postStatusDesc = 'papelera';
+
+        if ($postStatusName != 'trashed') {
+            $postStatus = PostStatus::where('name', $postStatusName)->firstOrFail();
+            $postStatusDesc = $postStatus->desc;
+        }
+
         $postTypePublishedCount = DB::select(
             'select count(id) as count from posts where user_id = ? 
-            and post_type_id = ? and post_status_id = ?',
+            and post_type_id = ? and post_status_id = ? and deleted_at is null',
             [auth()->user()->id, $postType->id, $postStatusPublished->id]
         )[0]->count;
 
         $postTypeDraftCount = DB::select(
             'select count(id) as count from posts where user_id = ? and
-             post_type_id = ? and post_status_id = ?',
+             post_type_id = ? and post_status_id = ? and deleted_at is null',
             [auth()->user()->id, $postType->id, $postStatusDraft->id]
+        )[0]->count;
+
+        $trashedPostsCount = DB::select(
+            'select count(id) as count from posts where user_id = ?
+            and post_type_id = ? 
+            and deleted_at is not null',
+            [auth()->user()->id, $postType->id]
         )[0]->count;
 
         $posts = Post::with('type')
@@ -36,16 +50,26 @@ class AdminController extends Controller
             $query->orderBy('name');
         }])
         ->with('type')
-        ->where('post_type_id', $postType->id)
-        ->where('post_status_id', $postStatus->id)
-        ->where('user_id', auth()->user()->id)
+        ->where('post_type_id', $postType->id);
+
+        if ($postStatus == null) {
+            $posts->onlyTrashed();
+        } else {
+            $posts->where('post_status_id', $postStatus->id);
+        }
+
+        // need to reassign $posts variable for paginator to work when cutting the method chaining
+        $posts = $posts->where('user_id', auth()->user()->id)
         ->select(['id', 'title', 'slug', 'post_type_id'])
-        ->orderBy('created_at', 'desc')->paginate(10);
+        ->latest('created_at')
+        ->paginate(10);
+        
 
         return view('admin.posts')
         ->with(compact(
-            'posts', 'postType', 'postStatus', 'postTypePublishedCount',
-            'postTypeDraftCount', 'postStatusPublished', 'postStatusDraft')
+            'posts', 'postType', 'postStatusName', 'postTypePublishedCount',
+            'postTypeDraftCount', 'postStatusPublished', 'postStatusDraft',
+            'postStatusDesc', 'trashedPostsCount')
         );
 
     }

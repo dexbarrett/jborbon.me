@@ -1,10 +1,11 @@
 <?php
 namespace DexBarrett\Listeners;
 
-use DexBarrett\Post;
 use DexBarrett\Events\PostCreated;
 use DexBarrett\Events\PostDeleted;
+use DexBarrett\Events\PostRestored;
 use DexBarrett\Events\PostStatusChanged;
+use DexBarrett\Post;
 use DexBarrett\Services\RSS\FeedBuilder;
 use DexBarrett\Services\Sitemap\SitemapBuilder;
 
@@ -26,14 +27,28 @@ class PostEventListener
         }
     }
 
-    public function onPostDeleted()
+    public function onPostDeleted(PostDeleted $event)
     {
-        $this->purgeContentCache();
+        if ($event->post->isOfType('post') 
+            && $event->post->status->name == 'published') {
+            $this->purgeContentCache();
+        }
     }
 
-    public function onPostStatusChanged()
+    public function onPostStatusChanged(PostStatusChanged $event)
     {
-       $this->purgeContentCache();
+        if ($event->post->isOfType('post')) {
+            $this->purgeContentCache();
+        }
+       
+    }
+
+    public function onPostRestored(PostRestored $event)
+    {
+        if ($event->post->isOfType('post') 
+            && $event->post->status->name == 'published') {
+            $this->purgeContentCache();
+        }
     }
 
     protected function purgeContentCache()
@@ -57,6 +72,11 @@ class PostEventListener
         $events->listen(
             PostStatusChanged::class,
             'DexBarrett\Listeners\PostEventListener@onPostStatusChanged'
+        );
+
+        $events->listen(
+            PostRestored::class,
+            'DexBarrett\Listeners\PostEventListener@onPostRestored'
         );
     }
 }

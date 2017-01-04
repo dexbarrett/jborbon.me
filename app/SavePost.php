@@ -74,7 +74,7 @@ class SavePost
         $post->enableComments(array_get($data, 'enable_comments', 0));
 
         if ($statusChanged) {
-            event(new PostStatusChanged);
+            event(new PostStatusChanged($post));
         }
 
         return true;
