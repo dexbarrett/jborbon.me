@@ -3,25 +3,32 @@
 namespace DexBarrett;
 
 use Carbon\Carbon;
-use DexBarrett\Tag;
-use DexBarrett\PostType;
-use DexBarrett\PostStatus;
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
 use DexBarrett\PostCategory;
 use DexBarrett\PostSettings;
+use DexBarrett\PostStatus;
+use DexBarrett\PostType;
+use DexBarrett\Tag;
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\SluggableTrait;
-use Cviebrock\EloquentSluggable\SluggableInterface;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model implements SluggableInterface
 {
     use SluggableTrait;
+    use SoftDeletes;
 
     protected $sluggable = [
         'build_from' => 'title',
         'save_to'    => 'slug',
     ];
 
-    protected $dates = ['created_at', 'updated_at', 'published_at'];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'published_at',
+        'deleted_at'
+    ];
 
     /* Mutators */
 
@@ -68,7 +75,8 @@ class Post extends Model implements SluggableInterface
 
     public function isPublished()
     {
-        return strtolower($this->status->name) == 'published';
+        return strtolower($this->status->name) == 'published' 
+                && ! $this->trashed();
     }
 
     public function isOfType($type)
@@ -117,16 +125,5 @@ class Post extends Model implements SluggableInterface
     public function settings()
     {
         return $this->hasOne(PostSettings::class);
-    }
-
-
-    /* Model Events */
-    protected static function boot()
-    {
-        parent:: boot();
-
-        static::deleting(function($post){
-            $post->tags()->detach();
-        });
     }
 }

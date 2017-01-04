@@ -19,7 +19,7 @@
                     {!! Form::textarea('content', null, ['class' => 'form-control', 'rows' => '20']) !!}
                 </div>
                 <div class="checkbox">
-                    <label>{!! Form::checkbox('enable_comments', 1, true) !!} habilitar comentarios en publicación</label>
+                    <label>{!! Form::checkbox('enable_comments', 1, false) !!} habilitar comentarios en publicación</label>
                 </div>
             </div>
             <div class="col-md-3">
