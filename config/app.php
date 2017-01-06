@@ -155,7 +155,8 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
         AlfredoRamos\ParsedownExtra\ParsedownExtraServiceProvider::class,
-        Pingpong\Shortcode\ShortcodeServiceProvider::class
+        Pingpong\Shortcode\ShortcodeServiceProvider::class,
+        GrahamCampbell\Throttle\ThrottleServiceProvider::class
 
     ],
 
@@ -210,7 +211,8 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Markdown'  => AlfredoRamos\ParsedownExtra\Facades\ParsedownExtra::class,
-        'Shortcode'  => Pingpong\Shortcode\ShortcodeFacade::class
+        'Shortcode'  => Pingpong\Shortcode\ShortcodeFacade::class,
+        'Throttle' => GrahamCampbell\Throttle\Facades\Throttle::class,
 
     ],
 
