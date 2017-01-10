@@ -3,6 +3,7 @@
 @section('custom-styles')
 <link href="/lib/tooltipster/tooltipster.css" rel="stylesheet">
 <link href="/lib/tooltipster/tooltipster-noir.css" rel="stylesheet">
+<link href="/lib/sweetalert/sweetalert.css" rel="stylesheet">
 @stop
 @section('content')
 <div class="row">
@@ -51,7 +52,7 @@
                                 </a>
                             @endif
                             @if($postStatusName == 'trashed')
-                                <a href="{{ action('PostController@destroy', ['postID' => $post->id, 'forceDelete' => 1]) }}" class="btn btn-danger btn-xs tooltipster delete-post" title="eliminar <strong>{{ $post->title }}</strong>"><i class="fa fa-trash button-icon"></i>eliminar
+                                <a href="{{ action('PostController@destroy', ['postID' => $post->id, 'forceDelete' => 1]) }}" class="btn btn-danger btn-xs tooltipster delete-post permanent" title="eliminar <strong>{{ $post->title }}</strong>"><i class="fa fa-trash button-icon"></i>eliminar
                                 </a>
                             @else
                                 <a href="{{ action('PostController@destroy', ['postID' => $post->id, 'forceDelete' => 0]) }}" class="btn btn-danger btn-xs tooltipster delete-post" title="enviar <strong>{{ $post->title }}</strong> a la papelera "><i class="fa fa-trash button-icon"></i>papelera
@@ -73,6 +74,7 @@
 @stop
 @section('custom-scripts')
 <script src="/lib/tooltipster/jquery.tooltipster.min.js"></script>
+<script src="/lib/sweetalert/sweetalert.min.js"></script>
 <script>
     $('.tooltipster').tooltipster({
         theme: 'tooltipster-noir',
@@ -83,9 +85,24 @@
         e.preventDefault();
         deleteButton = $(this);
 
-        $('#posts-list')
-            .attr('action', deleteButton.attr('href'))
-            .submit();
+        if (deleteButton.hasClass('permanent')) {
+            swal({
+                title: 'confirmación',
+                text: '¿Realmente deseas eliminar este elemento?',
+                type: 'warning',
+                confirmButtonText: 'Sí',
+                cancelButtonText: 'No',
+                showCancelButton: true
+            }, function(isConfirm){
+                if (isConfirm) { 
+                    deletePost(deleteButton);
+                }
+            });
+        } else {
+            deletePost(deleteButton);
+        }
+
+
     });
 
     $('table.post-list').on('click', 'a.restore-post', function(e){
@@ -95,5 +112,12 @@
             .attr('action', $(this).attr('href'))
             .submit(); 
     });
+
+    function deletePost(element)
+    {
+        $('#posts-list')
+            .attr('action', element.attr('href'))
+            .submit();
+    }
 </script>
 @stop
