@@ -26,6 +26,8 @@ Route::get('{postType}/tag/{tagslug}', 'PostController@findByTag');
 Route::get('{postType}/category/{categorySlug}', 'PostController@findByCategory');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+    Route::get('profile', 'AdminController@editProfile');
+    Route::post('profile', 'AdminController@saveProfile');
     Route::resource('post', 'PostController', ['except' => ['create', 'show', 'destroy']]);
     Route::get('{postType}/create', 'PostController@create');
     Route::get('dashboard/{postType?}/{postStatus?}', 'AdminController@index');

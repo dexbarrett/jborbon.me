@@ -2,6 +2,7 @@
 
 namespace DexBarrett\Http\Controllers;
 
+use Validator;
 use DexBarrett\Post;
 use DexBarrett\PostType;
 use DexBarrett\PostStatus;
@@ -71,6 +72,48 @@ class AdminController extends Controller
             'postTypeDraftCount', 'postStatusPublished', 'postStatusDraft',
             'postStatusDesc', 'trashedPostsCount')
         );
+
+    }
+
+    public function editProfile() {
+        return view('admin.profile')
+            ->with(
+                'user', auth()->user()
+            );
+    }
+
+    public function saveProfile(Request $request)
+    {
+        $formData = $request->all();
+
+        $validator = Validator::make($formData, [
+            'username' => 'required|alpha_num',
+            'email' => 'required|email',
+            'password' => 'confirmed|min:8'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors($validator);
+        }
+
+        
+        $user = auth()->user();
+
+        $user->username = $formData['username'];
+        $user->email = $formData['email'];
+
+        if (trim($formData['password'])) {
+            $user->password = trim($formData['password']);
+        }
+
+        $user->save();
+
+        return redirect()
+            ->back()
+            ->with('message', 'Perfil actualizado correctamente');
 
     }
 }
