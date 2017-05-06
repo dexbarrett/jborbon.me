@@ -10,6 +10,10 @@
                 <a href="{{ action('AdminController@index', ['postType' => 'page']) }}"><i class="fa fa-file-text button-icon"></i>Páginas</a>
             </li>
             <li role="separator" class="divider"></li>
+            <li>
+                <a href="{{ action('AdminController@editProfile') }}"><i class="fa fa-user button-icon" aria-hidden="true"></i></i>Perfil</a>
+            </li>
+            <li role="separator" class="divider"></li>
             <li><a href="{{ action('SessionController@destroy') }}">Cerrar Sesión <i class="fa fa-sign-out"></i></a></li>
         </ul>
     </li>
