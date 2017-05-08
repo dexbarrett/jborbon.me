@@ -146,6 +146,7 @@ return [
         DexBarrett\Providers\RouteServiceProvider::class,
         DexBarrett\Providers\ViewComposerServiceProvider::class,
         DexBarrett\Providers\ShortCodeServiceProvider::class,
+        DexBarrett\Providers\DropboxServiceProvider::class,
 
         /*
          * Third-party Service Providers
@@ -156,7 +157,8 @@ return [
         Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
         AlfredoRamos\ParsedownExtra\ParsedownExtraServiceProvider::class,
         Pingpong\Shortcode\ShortcodeServiceProvider::class,
-        GrahamCampbell\Throttle\ThrottleServiceProvider::class
+        GrahamCampbell\Throttle\ThrottleServiceProvider::class,
+        Spatie\Backup\BackupServiceProvider::class,
 
     ],
 
