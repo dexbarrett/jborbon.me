@@ -142,17 +142,17 @@ return [
             'whenBackupWasSuccessful'     => ['log'],
             'whenCleanupWasSuccessful'    => ['log'],
             'whenHealthyBackupWasFound'   => ['log'],
-            'whenBackupHasFailed'         => ['log'],
-            'whenCleanupHasFailed'        => ['log'],
-            'whenUnhealthyBackupWasFound' => ['log'],
+            'whenBackupHasFailed'         => ['log', 'mail'],
+            'whenCleanupHasFailed'        => ['log', 'mail'],
+            'whenUnhealthyBackupWasFound' => ['log', 'mail'],
         ],
 
         /*
          * Here you can specify how emails should be sent.
          */
         'mail' => [
-            'from' => 'your@email.com',
-            'to' => 'your@email.com',
+            'from' => 'notifications@jborbon.me',
+            'to' => 'judas.borbon@gmail.com',
         ],
 
         /*
