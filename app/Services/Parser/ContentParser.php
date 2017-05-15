@@ -1,8 +1,9 @@
 <?php
 namespace DexBarrett\Services\Parser;
 
-use League\Pipeline\Pipeline;
 use AlfredoRamos\ParsedownExtra\ParsedownExtraLaravel as MarkdownParser;
+use League\Pipeline\Pipeline;
+use Maiorano\Shortcodes\Manager\ShortcodeManager as ShortcodeParser;
 
 class ContentParser
 {
@@ -19,8 +20,8 @@ class ContentParser
         ],
 
         'shortcode' => [
-            'class' => 'shortcode', // <-- had to point to key in Laravel's container to get instance with shortcodes properly registered
-            'method' => 'compile'
+            'class' => ShortcodeParser::class,
+            'method' => 'doShortcode'
         ]
     ];
 

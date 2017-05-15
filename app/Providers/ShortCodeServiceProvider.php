@@ -4,11 +4,10 @@ namespace DexBarrett\Providers;
 
 use DexBarrett\ShortCode;
 use Illuminate\Support\ServiceProvider;
+use Maiorano\Shortcodes\Manager\ShortcodeManager;
 
 class ShortCodeServiceProvider extends ServiceProvider
 {
-    protected $shortcodes = ['alert', 'tooltip', 'video', 'image'];
-
     /**
      * Bootstrap the application services.
      *
@@ -16,7 +15,9 @@ class ShortCodeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerShortCodes();
+        $this->app->singleton(ShortcodeManager::class, function ($app) {
+            return $this->registerShortCodes();
+        });
     }
 
     /**
@@ -31,8 +32,16 @@ class ShortCodeServiceProvider extends ServiceProvider
 
     protected function registerShortCodes()
     {
-        foreach ($this->shortcodes as $shortcode) {
-            $this->app['shortcode']->register($shortcode, "DexBarrett\ShortCode@{$shortcode}");
+        $manager = new ShortcodeManager;
+
+        $fileSystem = $this->app['files'];
+        $shortcodeFiles = $fileSystem->files(app_path('Shortcodes'));
+
+        foreach ($shortcodeFiles as $file) {
+            $className = 'DexBarrett\\Shortcodes\\' . basename($file, '.php');
+            $manager->register(new $className);
         }
+
+        return $manager;
     }
 }

@@ -12,14 +12,14 @@
         "filp/whoops": "~1.0",
         "cviebrock/eloquent-sluggable": "^3.1",
         "alfredo-ramos/parsedown-extra-laravel": "~0.4",
-        "pingpong/shortcode": "2.1.*",
         "league/pipeline": "^0.2.2",
         "tackk/cartographer": "1.*",
         "suin/php-rss-writer": "^1.5",
         "graham-campbell/throttle": "^5.3",
         "spatie/flysystem-dropbox": "^1.0",
         "spatie/laravel-backup": "^3.0.0",
-        "guzzlehttp/guzzle": "~5.3|~6.0"
+        "guzzlehttp/guzzle": "~5.3|~6.0",
+        "maiorano84/shortcodes": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
