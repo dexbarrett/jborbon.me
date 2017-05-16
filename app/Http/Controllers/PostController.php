@@ -153,6 +153,7 @@ class PostController extends Controller
         if((bool)$forceDelete)
         {
             $post->tags()->detach();
+            $post->settings->delete();
             $post->forceDelete();
         } else {
             $post->delete();
