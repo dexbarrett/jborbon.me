@@ -1,5 +1,5 @@
 <ul class="nav navbar-nav navbar-right">
-    <li class="active"><a href="/">Inicio</a></li>
-    <li><a href="/acerca-de">Acerca de</a></li>
-    <li><a href="/feed"><i class="fa fa-rss-square fa-2x"></i></a></li>
+    <li class="active"><a href="{{ url('/') }}">Inicio</a></li>
+    <li><a href="{{ url('acerca-de') }}">Acerca de</a></li>
+    <li><a href="{{ action('FeedController@render') }}"><i class="fa fa-rss-square fa-2x"></i></a></li>
 </ul>
