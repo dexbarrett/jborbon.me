@@ -23,3 +23,14 @@ function getBookReviewIcons($score)
 
     return implode('&nbsp;', $iconMarkup);
 }
+
+function getBookFormatIcon($format)
+{
+    $format = trim(strtolower($format));
+
+    if (strpos($format, 'audio') !== false) {
+        return '<i class="fa fa-fw fa-volume-up"></i>';
+    }
+
+    return '<i class="fa fa-fw fa-book"></i>';
+}

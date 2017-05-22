@@ -65,6 +65,7 @@ protected function getReadListContent()
         $books = array_map(function($item) {
             return [
                 'title' => (string)$item->book->title,
+                'format' => (string)$item->book->format,
                 'rating' => (int)$item->rating,
                 'imageUrl' => (string)$item->book->image_url,
                 'readAt' => Carbon::parse((string)$item->read_at)->format('d/m/Y'),
