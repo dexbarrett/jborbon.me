@@ -14,15 +14,3 @@
     </div>
 </div>
 @stop
-@section('custom-scripts')
-<script src="/lib/raty/jquery.raty-fa.js"></script>
-<script>
-$('.rating').raty({
-  readOnly: true,
-  hints: ['pésimo', 'malo', 'regular', 'bueno', 'osom'],
-  score: function() {
-    return $(this).data('score');
-  }
-});
-</script>
-@stop

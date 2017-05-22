@@ -18,7 +18,10 @@
             </a>
             <ul>
                 <li>Leído el {{ $book['readAt'] }}</li>
-                <li>Mi calificación <span class="rating" data-score="{{ $book['rating'] }}"></span></li>
+                <li>Mi calificación: <span class="rating">
+                    {!! getBookReviewIcons($book['rating']) !!}
+                </span>
+                </li>
             </ul>
             @if(strlen($book['review']))
                 <hr>
