@@ -33,7 +33,7 @@ class GoodReads
         $this->cache->put(
             $this->cacheKey,
             $readList,
-            Carbon::now()->addWeek()
+            Carbon::now()->addDay()
         );
 
         return $readList;
@@ -65,10 +65,12 @@ protected function getReadListContent()
         $books = array_map(function($item) {
             return [
                 'title' => (string)$item->book->title,
+                'author' => (string)$item->book->authors->author->name,
                 'format' => (string)$item->book->format,
                 'rating' => (int)$item->rating,
                 'imageUrl' => (string)$item->book->image_url,
-                'readAt' => Carbon::parse((string)$item->read_at)->format('d/m/Y'),
+                'startedAt' => Carbon::parse((string)$item->started_at)->format('d/m/Y'),
+                'finishedAt' => Carbon::parse((string)$item->read_at)->format('d/m/Y'),
                 'url' => (string)$item->book->link,
                 'review' => trim((string)$item->body)
             ];
