@@ -15,6 +15,7 @@ Route::get('/', 'PostController@index');
 
 Route::get('sitemap.xml', 'SitemapController@render');
 Route::get('feed', 'FeedController@render');
+Route::get('goodreads-read-list', 'ReadListController@getReadList');
 
 
 Route::get('login', 'SessionController@index');
