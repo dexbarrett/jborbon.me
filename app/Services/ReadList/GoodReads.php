@@ -33,7 +33,7 @@ class GoodReads
         $this->cache->put(
             $this->cacheKey,
             $readList,
-            Carbon::now()->addWeek()
+            Carbon::now()->addDay()
         );
 
         return $readList;
