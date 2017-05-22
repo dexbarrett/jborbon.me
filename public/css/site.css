@@ -121,3 +121,19 @@ li.category-list-item a {
 .notfound-header {
     font-size: 4.5em;
 }
+
+#book-reviews {
+    margin-top: 2em;
+}
+
+.book-reviews-header h1 {
+    text-transform: uppercase;
+}
+
+#book-reviews .book-review ul {
+    list-style-type: none;
+}
+
+#book-reviews .book-review ul li {
+    padding-top: 0.6em;
+}
