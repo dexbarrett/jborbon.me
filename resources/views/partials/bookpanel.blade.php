@@ -17,8 +17,12 @@
                 <h4>{{ $book['title'] }}</h4>
             </a>
             <ul>
+                <li>Autor - {{ $book['author'] }}</li>
                 <li>Formato <span>{!! getBookFormatIcon($book['format']) !!}</span></li>
-                <li>Finalizado el {{ $book['readAt'] }}</li>
+                @if($book['startedAt'])
+                    <li>Iniciado el {{ $book['startedAt'] }}</li>
+                @endif
+                <li>Finalizado el {{ $book['finishedAt'] }}</li>
                 <li>Mi calificación: <span class="rating">
                     {!! getBookReviewIcons($book['rating']) !!}
                 </span>
