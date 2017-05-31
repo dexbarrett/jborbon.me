@@ -2,14 +2,15 @@
 
 namespace DexBarrett\Http\Controllers;
 
-use Validator;
-use DexBarrett\Post;
-use DexBarrett\PostType;
-use DexBarrett\PostStatus;
-use Illuminate\Http\Request;
-use DexBarrett\Http\Requests;
-use Illuminate\Support\Facades\DB;
 use DexBarrett\Http\Controllers\Controller;
+use DexBarrett\Http\Requests;
+use DexBarrett\Post;
+use DexBarrett\PostStatus;
+use DexBarrett\PostType;
+use DexBarrett\Services\Imgur\Imgur;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Validator;
 
 class AdminController extends Controller
 {
@@ -115,5 +116,18 @@ class AdminController extends Controller
             ->back()
             ->with('message', 'Perfil actualizado correctamente');
 
+    }
+
+    public function showSettings(Imgur $imgur)
+    {
+        return view('admin.settings')
+            ->with(compact('imgur'));
+    }
+
+    public function imgurAuth(Request $request, Imgur $imgur)
+    {
+        $imgur->requestAccessToken($request->input('code'));
+        
+        return redirect()->action('AdminController@showSettings');
     }
 }

@@ -35,6 +35,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     protected $hidden = ['password', 'remember_token'];
 
+     protected $casts = [
+        'imgur_token' => 'array'
+    ];
+
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = \Hash::make($password);

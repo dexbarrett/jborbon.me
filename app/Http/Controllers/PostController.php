@@ -11,6 +11,7 @@ use DexBarrett\PostCategory;
 use DexBarrett\PostStatus;
 use DexBarrett\PostType;
 use DexBarrett\SavePost;
+use DexBarrett\Services\Imgur\Imgur;
 use DexBarrett\Tag;
 use Illuminate\Http\Request;
 
@@ -172,5 +173,22 @@ class PostController extends Controller
         event(new PostRestored($post));
 
         return redirect()->back();
+    }
+
+    public function attachImage(Imgur $imgur)
+    {
+        $imageFile = request()->file('picture');
+
+        $imageData = base64_encode(\File::get($imageFile->getRealPath()));
+
+        $imgurResponse = $imgur->uploadImageFromData($imageData);
+
+        $imageLink = (strrpos($imgurResponse['link'], 'https') !== false)
+                     ? $imgurResponse['link'] 
+                     : str_replace('http', 'https', $imgurResponse['link']);
+
+        return response()->json([
+            'imageUrl' => $imageLink
+        ]);
     }
 }

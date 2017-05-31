@@ -16,7 +16,7 @@
                     {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => "título de {$postType->desc}", 'autocomplete' => 'off']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::textarea('content', null, ['class' => 'form-control', 'rows' => '20']) !!}
+                    {!! Form::textarea('content', null, ['class' => 'form-control inline-attachment', 'rows' => '20']) !!}
                 </div>
                 <div class="checkbox">
                     <label>{!! Form::checkbox('enable_comments', 1, false) !!} habilitar comentarios en publicación</label>
@@ -51,7 +51,13 @@
 @stop
 @section('custom-scripts')
 <script src="/lib/selectize/selectize.min.js"></script>
+<script src="/lib/inline-attachment/inline-attachment.min.js"></script>
+<script src="/lib/inline-attachment/jquery.inline-attachment.min.js"></script>
+<script src="/lib/inline-attachments.js"></script>
 <script>
+var inlineAttachmentUrl = '{{ action("PostController@attachImage") }}';
+enableInlineAttachments(inlineAttachmentUrl, 'imageUrl', 'picture');
+
     $('.selectize').selectize({
         highlight: false,
         create: true,

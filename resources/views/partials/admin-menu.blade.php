@@ -13,6 +13,9 @@
             <li>
                 <a href="{{ action('AdminController@editProfile') }}"><i class="fa fa-user button-icon" aria-hidden="true"></i></i>Perfil</a>
             </li>
+            <li>
+                <a href="{{ action('AdminController@showSettings') }}"><i class="fa fa-sliders button-icon" aria-hidden="true"></i></i>Configuración</a>
+            </li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ action('SessionController@destroy') }}">Cerrar Sesión <i class="fa fa-sign-out"></i></a></li>
         </ul>

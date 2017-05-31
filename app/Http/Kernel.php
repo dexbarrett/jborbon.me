@@ -2,6 +2,7 @@
 
 namespace DexBarrett\Http;
 
+use DexBarrett\Http\Middleware\ImgurMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -29,5 +30,6 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \DexBarrett\Http\Middleware\RedirectIfAuthenticated::class,
         'post.available' => \DexBarrett\Http\Middleware\PostAvailable::class,
+        'auth.imgur' => ImgurMiddleware::class,
     ];
 }

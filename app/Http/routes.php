@@ -29,9 +29,13 @@ Route::get('{postType}/category/{categorySlug}', 'PostController@findByCategory'
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('profile', 'AdminController@editProfile');
     Route::post('profile', 'AdminController@saveProfile');
+    Route::get('settings', 'AdminController@showSettings');
+    Route::get('auth/imgur/callback', 'AdminController@imgurAuth');
     Route::resource('post', 'PostController', ['except' => ['create', 'show', 'destroy']]);
     Route::get('{postType}/create', 'PostController@create');
     Route::get('dashboard/{postType?}/{postStatus?}', 'AdminController@index');
     Route::post('delete/{postID}/{forceDelete}', 'PostController@destroy');
     Route::post('post/{id}/restore', 'PostController@restore');
+    Route::post('post/attachImage', 'PostController@attachImage')
+      ->middleware(['auth.imgur']);
 });
