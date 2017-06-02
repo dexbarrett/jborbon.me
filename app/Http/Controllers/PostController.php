@@ -191,4 +191,14 @@ class PostController extends Controller
             'imageUrl' => $imageLink
         ]);
     }
+
+   public function getAlbumImages(Imgur $imgur)
+   {   
+        $images = collect($imgur->getBlogImages())
+            ->map(function($item, $key) {
+                return collect($item)->only(['id', 'link']);
+            });
+
+        return response()->json($images);
+   }
 }

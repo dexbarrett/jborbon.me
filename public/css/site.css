@@ -137,3 +137,17 @@ li.category-list-item a {
 #book-reviews .book-review ul li {
     padding-top: 0.6em;
 }
+
+#album-images-modal .thumbnails.image_picker_selector img {
+  width: 200px;
+  height:200px;
+}
+
+#album-images-modal .modal-dialog{
+    overflow-y: initial !important
+}
+
+#album-images-modal .modal-body{
+    height: 400px;
+    overflow-y: auto;
+}

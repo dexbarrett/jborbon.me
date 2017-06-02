@@ -38,4 +38,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::post('post/{id}/restore', 'PostController@restore');
     Route::post('post/attachImage', 'PostController@attachImage')
       ->middleware(['auth.imgur']);
+
+    Route::get('testing', 'PostController@getAlbumImages')
+        ->middleware(['auth.imgur']);
 });
