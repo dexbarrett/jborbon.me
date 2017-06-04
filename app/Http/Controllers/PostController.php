@@ -183,12 +183,27 @@ class PostController extends Controller
 
         $imgurResponse = $imgur->uploadImageFromData($imageData);
 
-        $imageLink = (strrpos($imgurResponse['link'], 'https') !== false)
-                     ? $imgurResponse['link'] 
-                     : str_replace('http', 'https', $imgurResponse['link']);
+        $imageLink = getHttpsURLForImage($imgurResponse['link']);
 
         return response()->json([
             'imageUrl' => $imageLink
         ]);
     }
+
+   public function getAlbumImages(Imgur $imgur)
+   {   
+        $images = collect($imgur->getBlogImages())
+            ->map(function($item, $key) {
+                return collect($item)->only(['id', 'link'])
+                    ->transform(function($i, $k) {
+                        if ($k == 'link') {
+                            return getHttpsURLForImage($i);
+                        }
+
+                        return $i;
+                    });
+            });
+
+        return response()->json($images);
+   }
 }

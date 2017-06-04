@@ -34,3 +34,10 @@ function getBookFormatIcon($format)
 
     return '<i class="fa fa-fw fa-book"></i>';
 }
+
+function getHttpsURLForImage($url)
+{
+    return (strrpos($url, 'https') !== false)
+                ? $url 
+                : str_replace('http', 'https', $url);
+}

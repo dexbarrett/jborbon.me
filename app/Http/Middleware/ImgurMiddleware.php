@@ -28,7 +28,7 @@ class ImgurMiddleware
         } else {
 
             if ($request->ajax()) {
-                return response('Unauthorized.', 401);
+                return response('No estás autenticado con Imgur.', 401);
             } 
             
             return redirect()->action('AdminController@showSettings');
