@@ -1,4 +1,4 @@
-function enableInlineAttachments(uploadUrl, jsonFieldName, uploadFieldName)
+function enableInlineAttachments(uploadUrl, jsonFieldName, uploadFieldName, CSRFToken)
 {
      $('.inline-attachment').inlineattachment({
         uploadUrl: uploadUrl,
@@ -7,7 +7,8 @@ function enableInlineAttachments(uploadUrl, jsonFieldName, uploadFieldName)
         urlText: '[image]{filename}[/image]',
         progressText: '[subiendo imagen...]',
         extraHeaders: {
-            'X-Requested-With': 'XMLHttpRequest'
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-TOKEN': CSRFToken
         },
 
         onFileUploadError: function(response) {

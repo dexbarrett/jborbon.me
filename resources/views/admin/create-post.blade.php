@@ -71,7 +71,7 @@
 var inlineAttachmentUrl = '{{ action("PostController@attachImage") }}';
 var albumImagesRoute = '{{ action("PostController@getAlbumImages") }}';
 
-enableInlineAttachments(inlineAttachmentUrl, 'imageUrl', 'picture');
+enableInlineAttachments(inlineAttachmentUrl, 'imageUrl', 'picture', $('input[name="_token"]').val());
 
     $('.selectize').selectize({
         highlight: false,

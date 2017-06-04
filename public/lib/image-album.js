@@ -64,7 +64,7 @@ function loadImages(getImagesURL)
         
     })
     .fail(function (jqXHR, textStatus, errorThrown) {
-        console.log('algo salio mal');
+        albumModalBody.html(jqXHR.responseText);
     })
     .always(function () {
         albumModalBody.LoadingOverlay("hide");
