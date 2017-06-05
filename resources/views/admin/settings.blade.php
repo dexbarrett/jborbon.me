@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-sm-8 col-md-offset-2">
         @if($imgur->getUserToken())
-            <p>Autenticado con imgur</p>
+            <p>Autenticado con imgur. <a href="{{ $imgur->getAuthenticationUrl() }}">Re-Autenticar</a></p>
         @else
             <p>No estás autenticado con Imgur. <a href="{{ $imgur->getAuthenticationUrl() }}">Autenticar</a></p>
         @endif
