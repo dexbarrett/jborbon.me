@@ -1,14 +1,14 @@
 <?php
 namespace DexBarrett;
 
-use DexBarrett\Tag;
+use DexBarrett\Events\PostCreated;
+use DexBarrett\Events\PostStatusChanged;
 use DexBarrett\Post;
 use DexBarrett\PostSettings;
 use DexBarrett\Services\Parser\ContentParser;
-use DexBarrett\Events\PostCreated;
-use DexBarrett\Events\PostStatusChanged;
-
 use DexBarrett\Services\Validation\PostValidator;
+use DexBarrett\Tag;
+use Ramsey\Uuid\Uuid;
 
 class SavePost
 {
@@ -37,6 +37,7 @@ class SavePost
         $post->post_category_id = $this->parseCategory($data['category']);
         $post->post_type_id = $data['post_type'];
         $post->post_status_id = $data['status'];
+        $post->uuid = Uuid::uuid1()->toString();
 
         $post->save();
         $post->tags()->attach($this->parseTags($data['tags']));

@@ -44,7 +44,7 @@
                     <td class="col-md-2 text-right">
                         <div class="btn-group">
                             @if($postStatusName != 'trashed')
-                                <a href="{{ action('PostController@edit', ['id' => $post->id]) }}" class="btn btn-primary btn-xs tooltipster" title="editar <strong>{{ $post->title }}</strong>"><i class="fa fa-pencil-square-o button-icon"></i>editar
+                                <a href="{{ action('PostController@edit', ['uuid' => $post->uuid]) }}" class="btn btn-primary btn-xs tooltipster" title="editar <strong>{{ $post->title }}</strong>"><i class="fa fa-pencil-square-o button-icon"></i>editar
                                 </a>
                             @endif
                             @if($postStatusName == 'trashed')

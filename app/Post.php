@@ -100,6 +100,11 @@ class Post extends Model implements SluggableInterface
         $this->settings->save();
     }
 
+    public static function findByUuid($uuid)
+    {
+        return static::where('uuid', $uuid)->firstOrFail();
+    }
+
     /* Relationships */
 
     public function category()

@@ -116,13 +116,13 @@ class PostController extends Controller
                 ->withErrors($savePost->errors());
         }
 
-        return redirect()->action('PostController@edit', ['post' => $postCreated->id])
+        return redirect()->action('PostController@edit', ['uuid' => $postCreated->uuid])
             ->with('message', 'El post se ha creado correctamente');
     }
 
-    public function edit($postID)
+    public function edit($uuid)
     {
-        $post = Post::findOrFail($postID);
+        $post = Post::findByUuid($uuid);
         $selectedTags = $post->tags->pluck('id')->toArray();
 
         return view('admin.edit-post')

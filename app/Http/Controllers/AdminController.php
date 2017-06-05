@@ -62,7 +62,7 @@ class AdminController extends Controller
 
         // need to reassign $posts variable for paginator to work when cutting the method chaining
         $posts = $posts->where('user_id', auth()->user()->id)
-        ->select(['id', 'title', 'slug', 'post_type_id'])
+        ->select(['id', 'title', 'slug', 'post_type_id', 'uuid'])
         ->latest('created_at')
         ->paginate(10);
         
