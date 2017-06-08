@@ -30,7 +30,7 @@
             </ul>
             @if(strlen($book['review']))
                 <hr>
-                <p><strong>Mi reseña:</strong> {{ lcfirst($book['review']) }}</p>
+                <p><strong>Mi reseña:</strong> {!! lcfirst($book['review']) !!}</p>
             @endif
         </div>
     </div>
