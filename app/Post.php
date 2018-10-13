@@ -75,7 +75,7 @@ class Post extends Model implements SluggableInterface
 
     public function isPublished()
     {
-        return strtolower($this->status->name) == 'published' 
+        return strtolower($this->status->name) == 'published'
                 && ! $this->trashed();
     }
 
@@ -87,17 +87,6 @@ class Post extends Model implements SluggableInterface
     public function publishedByUser($user)
     {
         return $user->id == $this->user_id;
-    }
-
-    public function hasCommentsEnabled()
-    {
-        return (bool) $this->settings->enable_comments;
-    }
-
-    public function enableComments($enable)
-    {
-        $this->settings->enable_comments = (bool)$enable;
-        $this->settings->save();
     }
 
     public static function findByUuid($uuid)
@@ -125,10 +114,5 @@ class Post extends Model implements SluggableInterface
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
-    }
-
-    public function settings()
-    {
-        return $this->hasOne(PostSettings::class);
     }
 }

@@ -32,7 +32,7 @@ class SavePost
         $post->markdown_content = $data['content'];
 
         $post->html_content = $this->contentParser->parse($data['content']);
-        
+
         $post->user_id = $data['user_id'];
         $post->post_category_id = $this->parseCategory($data['category']);
         $post->post_type_id = $data['post_type'];
@@ -41,13 +41,6 @@ class SavePost
 
         $post->save();
         $post->tags()->attach($this->parseTags($data['tags']));
-
-        $settings = new PostSettings([
-            'enable_comments' => array_get($data, 'enable_comments', 0)
-        ]);
-
-        $post->settings()->save($settings);
-
         event(new PostCreated($post));
 
         return $post;
@@ -60,7 +53,7 @@ class SavePost
         if ($this->dataIsNotValid($data)) {
             return false;
         }
-    
+
         $post->title = $data['title'];
         $post->markdown_content = $data['content'];
 
@@ -71,8 +64,6 @@ class SavePost
 
         $post->save();
         $post->tags()->sync($this->parseTags($data['tags']));
-
-        $post->enableComments(array_get($data, 'enable_comments', 0));
 
         if ($statusChanged) {
             event(new PostStatusChanged($post));

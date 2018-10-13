@@ -16,11 +16,8 @@
         <article class="post-content">
             {!! $post->html_content !!}
             <hr>
-            {!! formatTagsAsLabels($post->tags->toArray(), $post->type->name) !!} 
+            {!! formatTagsAsLabels($post->tags->toArray(), $post->type->name) !!}
         </article>
-        @if($post->hasCommentsEnabled())
-            @include('partials.disqus_thread')
-        @endif
     </div>
 </div>
 @stop

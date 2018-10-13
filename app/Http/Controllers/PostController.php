@@ -32,7 +32,7 @@ class PostController extends Controller
     public function create($postTypeName)
     {
         $postType = PostType::where('name', $postTypeName)->firstOrFail();
-        
+
         return view('admin.create-post')
             ->with(compact('postType'));
     }
@@ -79,7 +79,7 @@ class PostController extends Controller
     {
         $category = PostCategory::where('slug', $categorySlug)
             ->select(['id', 'name'])
-            ->firstOrFail();  
+            ->firstOrFail();
 
         $postType = PostType::where('name', $postTypeName)->firstOrFail();
         $postStatus = PostStatus::where('name', 'published')->firstOrFail();
@@ -100,7 +100,7 @@ class PostController extends Controller
                 ->with('filterName', $category->name)
                 ->with('postTypeName', $postType->desc);
 
-    }       
+    }
 
     public function store(SavePost $savePost)
     {
@@ -143,7 +143,7 @@ class PostController extends Controller
 
         return redirect()->back()
             ->with('message', 'El post se ha actualizado correctamente');
-    }    
+    }
 
     public function destroy($postID, $forceDelete)
     {
@@ -154,12 +154,11 @@ class PostController extends Controller
         if((bool)$forceDelete)
         {
             $post->tags()->detach();
-            $post->settings->delete();
             $post->forceDelete();
         } else {
             $post->delete();
         }
-        
+
 
         return redirect()->back();
     }
@@ -191,7 +190,7 @@ class PostController extends Controller
     }
 
    public function getAlbumImages(Imgur $imgur)
-   {   
+   {
         $images = collect($imgur->getBlogImages())
             ->map(function($item, $key) {
                 return collect($item)->only(['id', 'link'])

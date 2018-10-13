@@ -19,9 +19,6 @@
                 <div class="form-group">
                     {!! Form::textarea('content', null, ['class' => 'form-control inline-attachment', 'rows' => '20', 'id' => 'post-content']) !!}
                 </div>
-                <div class="checkbox">
-                    <label>{!! Form::checkbox('enable_comments', 1, false) !!} habilitar comentarios en publicación</label>
-                </div>
             </div>
             <div class="col-md-3">
                 <div class="panel panel-default">
