@@ -3,7 +3,7 @@
 @section('content')
 <div class="row book-reviews-header">
   <div class="col-xs-12 text-center">
-    <h1>lecturas más recientes</h1>
+    <h1>lecturas recientes</h1>
   </div>
 </div>
 <div class="row">
